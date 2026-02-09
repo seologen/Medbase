@@ -38,6 +38,14 @@ body { margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Seg
 .header h1 span { opacity:.7; font-weight:400; }
 .header p { margin:0; opacity:.85; font-size:.9rem; }
 
+.variant-switch { display:flex; justify-content:center; gap:0; margin-top:10px; }
+.variant-btn { padding:6px 20px; font-size:.78rem; font-weight:600; border:2px solid rgba(255,255,255,.4); background:transparent; color:rgba(255,255,255,.7); cursor:pointer; transition:all 150ms ease; letter-spacing:.02em; }
+.variant-btn:first-child { border-radius:20px 0 0 20px; border-right:1px solid rgba(255,255,255,.4); }
+.variant-btn:last-child { border-radius:0 20px 20px 0; border-left:1px solid rgba(255,255,255,.4); }
+.variant-btn.active { background:rgba(255,255,255,.2); color:#fff; border-color:rgba(255,255,255,.6); }
+.variant-btn:hover:not(.active) { background:rgba(255,255,255,.1); }
+.variant-desc { font-size:.7rem; color:rgba(255,255,255,.6); margin-top:4px; }
+
 .main-nav { display:flex; justify-content:center; gap:2px; padding:0; background:#1e3a5f; }
 .main-nav-item { padding:10px 24px; color:rgba(255,255,255,.7); font-size:.82rem; font-weight:600; text-transform:uppercase; letter-spacing:.03em; border-bottom:3px solid transparent; }
 .main-nav-item.active { color:#fff; border-bottom-color:#fff; }
@@ -76,7 +84,6 @@ body { margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Seg
 
 .hierarchy-hauptseite { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:8px; margin-bottom:0.75rem; }
 .hierarchy-group { margin-bottom:0.75rem; }
-.hierarchy-group-title { font-size:.6rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--color-text-light); margin-bottom:6px; padding-left:6px; }
 .hierarchy-unterseiten { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:8px; padding-left:1.5rem; border-left:3px solid var(--color-border); margin-left:0.5rem; }
 
 .page-card { background:var(--color-card-bg); border-radius:var(--radius-md); box-shadow:0 1px 4px var(--color-shadow); overflow:hidden; transition:transform 150ms ease, box-shadow 150ms ease; padding:10px 14px; }
@@ -125,6 +132,7 @@ body { margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Seg
 
 @media print {
   .main-nav { display:none !important; }
+  .variant-switch { display:none !important; }
   .cards-grid.collapsed { display:flex !important; }
   .page-card { break-inside:avoid; box-shadow:none; border:1px solid var(--color-border); }
 }
@@ -135,13 +143,18 @@ body { margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Seg
 <header class="header">
   <h1>Medbase Gruppe <span>| Sitemap</span></h1>
   <p>Karriere & Corporate Website &mdash; Kickoff 11.02.2026</p>
+  <div class="variant-switch">
+    <button class="variant-btn active" data-variant="v1">Variante 1 &mdash; nach Fachbereich</button>
+    <button class="variant-btn" data-variant="v2">Variante 2 &mdash; nach Berufsgruppe</button>
+  </div>
+  <div class="variant-desc" id="variant-desc">Berufsfelder: Medizin & Pflege, Pharma & Apotheken, Therapie, Zahnmedizin, Management, Corporate</div>
 </header>
 
 <div class="main-nav">
   <div class="main-nav-item active">Stellensuche</div>
   <div class="main-nav-item">Lohnrechner</div>
   <div class="main-nav-item">Ratgeber</div>
-  <div class="main-nav-item">Über uns</div>
+  <div class="main-nav-item">&Uuml;ber uns</div>
 </div>
 
 <main class="main-content">
@@ -149,43 +162,95 @@ body { margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Seg
 </main>
 
 <script>
-const pageData = {
+// ============================================================
+// VARIANTE 1: Berufsfelder nach Fachbereich
+// ============================================================
+const berufsfelderV1 = {
+  name: 'Berufsfelder',
+  navContext: 'Stellensuche',
+  pages: [
+    {
+      name: 'Medizin & Pflege', type: 'Hauptseite',
+      children: ['\u00c4rzt:innen', 'MPA', 'FaGe', 'APN (Advanced Practice Nurse)'],
+      locations: ['Z\u00fcrich', 'Luzern', 'St. Gallen', 'usw.']
+    },
+    {
+      name: 'Pharma & Apotheken', type: 'Hauptseite',
+      children: ['Apotheker:innen', 'Pharma-Assistent:innen', 'Fachpersonen Gesundheit Apotheke'],
+      locations: ['Z\u00fcrich', 'Basel', 'Bern', 'usw.']
+    },
+    {
+      name: 'Therapie & Rehabilitation', type: 'Hauptseite',
+      children: ['Physiotherapeut:innen', 'Ergotherapeut:innen', 'weitere Fachpersonen'],
+      locations: ['Z\u00fcrich', 'Bern', 'Winterthur', 'usw.']
+    },
+    {
+      name: 'Zahnmedizin', type: 'Hauptseite',
+      children: ['Zahn\u00e4rzt:innen', 'Dentalhygieniker:innen', 'Zahnmedizinische Assistent:innen'],
+      locations: ['Z\u00fcrich', 'Basel', 'Bern', 'usw.']
+    },
+    {
+      name: 'Management & Administration', type: 'Hauptseite',
+      children: ['Praxis-/Zentermanagement', 'Empfang & Administration', 'Arztsekret\u00e4r:innen', 'Back-Office (Abrechnung, QM, Personal)']
+    },
+    {
+      name: 'Corporate / \u00fcbergreifend', type: 'Hauptseite',
+      children: ['Gesundheitsmanagement / Corporate Health', 'Telemedizin & e-Health', 'Qualit\u00e4ts- & Prozessmanagement']
+    }
+  ]
+};
 
-  berufsfelder: {
-    name: 'Berufsfelder',
-    navContext: 'Stellensuche',
-    pages: [
-      {
-        name: 'Medizin & Pflege', type: 'Hauptseite',
-        children: ['Ärzt:innen', 'MPA', 'FaGe', 'APN (Advanced Practice Nurse)'],
-        locations: ['Zürich', 'Luzern', 'St. Gallen', 'usw.']
-      },
-      {
-        name: 'Pharma & Apotheken', type: 'Hauptseite',
-        children: ['Apotheker:innen', 'Pharma-Assistent:innen', 'Fachpersonen Gesundheit Apotheke'],
-        locations: ['Zürich', 'Basel', 'Bern', 'usw.']
-      },
-      {
-        name: 'Therapie & Rehabilitation', type: 'Hauptseite',
-        children: ['Physiotherapeut:innen', 'Ergotherapeut:innen', 'weitere Fachpersonen'],
-        locations: ['Zürich', 'Bern', 'Winterthur', 'usw.']
-      },
-      {
-        name: 'Zahnmedizin', type: 'Hauptseite',
-        children: ['Zahnärzt:innen', 'Dentalhygieniker:innen', 'Zahnmedizinische Assistent:innen'],
-        locations: ['Zürich', 'Basel', 'Bern', 'usw.']
-      },
-      {
-        name: 'Management & Administration', type: 'Hauptseite',
-        children: ['Praxis-/Zentermanagement', 'Empfang & Administration', 'Arztsekretär:innen', 'Back-Office (Abrechnung, QM, Personal)']
-      },
-      {
-        name: 'Corporate / übergreifend', type: 'Hauptseite',
-        children: ['Gesundheitsmanagement / Corporate Health', 'Telemedizin & e-Health', 'Qualitäts- & Prozessmanagement']
-      }
-    ]
-  },
+// ============================================================
+// VARIANTE 2: Berufsfelder nach Berufsgruppe
+// ============================================================
+const berufsfelderV2 = {
+  name: 'Berufsfelder',
+  navContext: 'Stellensuche',
+  pages: [
+    {
+      name: '\u00c4rztin / Arzt', type: 'Hauptseite',
+      children: ['Allgemeine Innere Medizin', 'Dermatologie', 'Gyn\u00e4kologie & Geburtshilfe', 'Kardiologie', 'Rheumatologie', 'Psychiatrie & Psychotherapie', 'Zahnmedizin', 'Ophthalmologie', 'P\u00e4diatrie', 'usw.'],
+      locations: ['Z\u00fcrich', 'Basel', 'Bern', 'Winterthur', 'usw.']
+    },
+    {
+      name: 'Medizinische:r Praxisassistent:in (MPA)', type: 'Hauptseite',
+      children: ['Praxisassistenz Allgemein', 'Fachbereich Gyn\u00e4kologie', 'Fachbereich Kardiologie', 'Teamleitung / Praxiskoordination', 'usw.'],
+      locations: ['Z\u00fcrich', 'Winterthur', 'Basel', 'Bern', 'usw.']
+    },
+    {
+      name: 'Therapeut:in', type: 'Hauptseite',
+      children: ['Physiotherapie', 'Psychotherapie', 'Ergotherapie', 'usw.'],
+      locations: ['Basel', 'St. Gallen', 'Bern', 'usw.']
+    },
+    {
+      name: 'Apotheker:in', type: 'Hauptseite',
+      children: ['Offizin-Apotheker:in', 'Gesch\u00e4ftsf\u00fchrende:r Apotheker:in', 'BAB / FPH-Weiterbildung', 'Koordination Apotheke', 'usw.'],
+      locations: ['Bern', 'Basel', 'Winterthur', 'Z\u00fcrich', 'usw.']
+    },
+    {
+      name: 'Fachfrau / Fachmann Apotheke', type: 'Hauptseite',
+      children: ['Fachperson Apotheke', 'Pharma-Assistenz', 'Produktion / Dailymed', 'Drogist:in', 'usw.'],
+      locations: ['Z\u00fcrich', 'St. Gallen', 'Bern', 'usw.']
+    },
+    {
+      name: 'Hauptsitz-Mitarbeitende', type: 'Hauptseite',
+      subtitle: 'Corporate & Management',
+      children: ['Leitung Medical Center', 'Business Development', 'Marketing & Merchandising', 'Digital & Content', 'Regionenleitung', 'usw.'],
+      locations: ['Winterthur', 'Z\u00fcrich', 'usw.']
+    },
+    {
+      name: 'Lehrberufe', type: 'Hauptseite',
+      subtitle: 'Lehrstellen & Apprentissages',
+      children: ['Fachfrau / Fachmann Apotheke EFZ', 'Med. Praxisassistent:in EFZ', 'Dentalassistent:in EFZ', 'usw.'],
+      locations: ['Z\u00fcrich', 'Bern', 'Basel', 'Luzern', 'usw.']
+    }
+  ]
+};
 
+// ============================================================
+// Gemeinsame Daten (identisch in beiden Varianten)
+// ============================================================
+const sharedData = {
   ausbildungsgrad: {
     name: 'Stellensuche nach Ausbildungsgrad',
     navContext: 'Stellensuche',
@@ -193,21 +258,21 @@ const pageData = {
       {
         name: 'Lehrstellen', type: 'Unterseite',
         children: ['MPA', 'Pharma-Assistent:in', 'Dentalassistent:in'],
-        locations: ['Zürich', 'Luzern', 'St. Gallen', 'usw.']
+        locations: ['Z\u00fcrich', 'Luzern', 'St. Gallen', 'usw.']
       },
       {
         name: 'Schnupperlehre', type: 'Unterseite',
-        locations: ['Zürich', 'Luzern', 'usw.']
+        locations: ['Z\u00fcrich', 'Luzern', 'usw.']
       },
       {
         name: 'Quereinsteiger:in', type: 'Unterseite',
         children: ['MPA', 'Physiotherapie', 'Gesundheitswesen'],
-        locations: ['Zürich', 'Basel', 'usw.']
+        locations: ['Z\u00fcrich', 'Basel', 'usw.']
       },
       {
         name: 'Praktikum', type: 'Unterseite',
-        children: ['MPA', 'Zahnärzt:in', 'usw.'],
-        locations: ['Zürich', 'Luzern', 'usw.']
+        children: ['MPA', 'Zahn\u00e4rzt:in', 'usw.'],
+        locations: ['Z\u00fcrich', 'Luzern', 'usw.']
       },
       {
         name: 'Ausbildung', type: 'Unterseite',
@@ -218,7 +283,7 @@ const pageData = {
         children: ['FPH Offizin by Medbase', 'Physiotherapeut:in', 'FaGe', 'MPA']
       },
       { name: 'Teamleitung', type: 'Unterseite' },
-      { name: 'Geschäftsleitung', type: 'Unterseite' }
+      { name: 'Gesch\u00e4ftsleitung', type: 'Unterseite' }
     ]
   },
 
@@ -226,7 +291,7 @@ const pageData = {
     name: 'Praxisstellen nach Standort',
     navContext: 'Stellensuche',
     pages: [
-      { name: 'Zürich', type: 'Unterseite' },
+      { name: 'Z\u00fcrich', type: 'Unterseite' },
       { name: 'Luzern', type: 'Unterseite' },
       { name: 'Basel', type: 'Unterseite' },
       { name: 'St. Gallen', type: 'Unterseite' },
@@ -251,12 +316,12 @@ const pageData = {
     name: 'Ratgeber',
     navContext: 'Ratgeber',
     pages: [
-      { name: 'Lohn & Salär', type: 'Hauptseite' },
+      { name: 'Lohn & Sal\u00e4r', type: 'Hauptseite' },
       { name: 'Lohn MPA', type: 'Unterseite' },
       { name: 'Lohn FaGe', type: 'Unterseite' },
       { name: 'Lohn Dentalassistent:in', type: 'Unterseite' },
       { name: 'Lohn Pharma-Assistent:in', type: 'Unterseite' },
-      { name: 'Lohn Zahnärzt:in', type: 'Unterseite' },
+      { name: 'Lohn Zahn\u00e4rzt:in', type: 'Unterseite' },
       { name: 'Lohn Physiotherapeut:in', type: 'Unterseite' },
       { name: 'Lohn Apotheker:in', type: 'Unterseite' },
       { name: 'usw.', type: 'Unterseite' },
@@ -265,8 +330,8 @@ const pageData = {
       { name: 'Berufsbild MPA', type: 'Unterseite' },
       { name: 'Berufsbild Physiotherapeut:in', type: 'Unterseite' },
       { name: 'Berufsbild Apotheker:in', type: 'Unterseite' },
-      { name: 'Berufsbild Zahnärzt:in', type: 'Unterseite' },
-      { name: 'Berufsbild Arztsekretär:in', type: 'Unterseite' },
+      { name: 'Berufsbild Zahn\u00e4rzt:in', type: 'Unterseite' },
+      { name: 'Berufsbild Arztsekret\u00e4r:in', type: 'Unterseite' },
       { name: 'usw.', type: 'Unterseite' }
     ]
   },
@@ -278,27 +343,27 @@ const pageData = {
       {
         name: 'Sicherheit & Fairness', type: 'Unterseite',
         subtitle: 'Kann ich hier sorgenfrei arbeiten?',
-        children: ['Lohn & Lohntransparenz', 'Zulagen (Nacht, Wochenende, Pikett)', 'GAV / faire Verträge', 'Arbeitszeiten & Dienstplanung', 'Pensum-Flexibilität', 'Arbeitsplatzsicherheit']
+        children: ['Lohn & Lohntransparenz', 'Zulagen (Nacht, Wochenende, Pikett)', 'GAV / faire Vertr\u00e4ge', 'Arbeitszeiten & Dienstplanung', 'Pensum-Flexibilit\u00e4t', 'Arbeitsplatzsicherheit']
       },
       {
         name: 'Alltag & Belastbarkeit', type: 'Unterseite',
-        subtitle: 'Wie fühlt sich ein normaler Arbeitstag an?',
-        children: ['Arbeitsbelastung', 'Personalschlüssel', 'Schichtmodelle vs. fixe Zeiten', 'Pausen, Erholung, Überstunden', 'Burnout-Prävention', 'Vereinbarkeit Familie / Beruf']
+        subtitle: 'Wie f\u00fchlt sich ein normaler Arbeitstag an?',
+        children: ['Arbeitsbelastung', 'Personalschl\u00fcssel', 'Schichtmodelle vs. fixe Zeiten', 'Pausen, Erholung, \u00dcberstunden', 'Burnout-Pr\u00e4vention', 'Vereinbarkeit Familie / Beruf']
       },
       {
         name: 'Sinn & Identifikation', type: 'Unterseite',
-        subtitle: 'Warum sollte ich hier arbeiten – und bleiben?',
-        children: ['Patientenzentrierung', 'Werte & Haltung', 'Qualität & Sicherheit', 'Beitrag zur Gesellschaft', 'Nachhaltigkeit', 'Ethik']
+        subtitle: 'Warum sollte ich hier arbeiten \u2013 und bleiben?',
+        children: ['Patientenzentrierung', 'Werte & Haltung', 'Qualit\u00e4t & Sicherheit', 'Beitrag zur Gesellschaft', 'Nachhaltigkeit', 'Ethik']
       },
       {
         name: 'Entwicklung & Perspektive', type: 'Unterseite',
-        subtitle: 'Was bringt mir dieser Job in 3–5 Jahren?',
-        children: ['Weiterbildung (CAS, HF, FH)', 'Karrierepfade', 'Rollenwechsel (z.B. Pflege \u2192 QM)', 'Talentförderung', 'Laufbahnmodelle']
+        subtitle: 'Was bringt mir dieser Job in 3\u20135 Jahren?',
+        children: ['Weiterbildung (CAS, HF, FH)', 'Karrierepfade', 'Rollenwechsel (z.B. Pflege \u2192 QM)', 'Talentf\u00f6rderung', 'Laufbahnmodelle']
       },
       {
-        name: 'Team & Führung', type: 'Unterseite',
-        subtitle: 'Mit wem arbeite ich – und wie werde ich geführt?',
-        children: ['Teamkultur', 'Interprofessionalität', 'Führungsstil', 'Feedbackkultur', 'Mitbestimmung', 'Psychologische Sicherheit']
+        name: 'Team & F\u00fchrung', type: 'Unterseite',
+        subtitle: 'Mit wem arbeite ich \u2013 und wie werde ich gef\u00fchrt?',
+        children: ['Teamkultur', 'Interprofessionalit\u00e4t', 'F\u00fchrungsstil', 'Feedbackkultur', 'Mitbestimmung', 'Psychologische Sicherheit']
       },
       {
         name: 'Organisation & Rahmen', type: 'Unterseite',
@@ -309,12 +374,12 @@ const pageData = {
   },
 
   corporate: {
-    name: 'Über uns',
-    navContext: 'Über uns',
+    name: '\u00dcber uns',
+    navContext: '\u00dcber uns',
     pages: [
       { name: 'Medbase Gruppe', type: 'Unterseite' },
       { name: 'Markenportfolio', type: 'Unterseite' },
-      { name: 'Geschäftsleitung', type: 'Unterseite' },
+      { name: 'Gesch\u00e4ftsleitung', type: 'Unterseite' },
       { name: 'Managed Care', type: 'Unterseite' },
       { name: 'Integrierte Versorgung', type: 'Unterseite' },
       { name: 'Equal Pay / WE PAY FAIR', type: 'Unterseite' },
@@ -330,29 +395,56 @@ const pageData = {
   }
 };
 
+// ============================================================
+// Varianten-Switch
+// ============================================================
+let currentVariant = 'v1';
+
+const variantDescriptions = {
+  v1: 'Berufsfelder: Medizin & Pflege, Pharma & Apotheken, Therapie, Zahnmedizin, Management, Corporate',
+  v2: 'Berufsfelder: \u00c4rztin/Arzt, MPA, Therapeut:in, Apotheker:in, Fachfrau/Fachmann Apotheke, Hauptsitz, Lehrberufe'
+};
+
+function getPageData() {
+  const bf = currentVariant === 'v1' ? berufsfelderV1 : berufsfelderV2;
+  return { berufsfelder: bf, ...sharedData };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderSitemap();
+
+  document.querySelectorAll('.variant-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentVariant = btn.dataset.variant;
+      document.getElementById('variant-desc').textContent = variantDescriptions[currentVariant];
+      renderSitemap();
+    });
+  });
 });
 
+// ============================================================
+// Rendering
+// ============================================================
+const navDescriptions = {
+  'Stellensuche': 'Berufsfelder, Ausbildungsgrad & Standorte',
+  'Lohnrechner': 'Interaktives Tool',
+  'Ratgeber': 'Lohn, Berufsbilder & Arbeitswelt',
+  '\u00dcber uns': 'Corporate, Standorte & Partnerschaften'
+};
+
 function renderSitemap() {
+  const pageData = getPageData();
   const container = document.getElementById('sitemap-container');
   container.innerHTML = '';
 
-  // Group categories by navContext
   const navGroups = {};
   Object.entries(pageData).forEach(([catId, category]) => {
     const nav = category.navContext || 'Sonstige';
     if (!navGroups[nav]) navGroups[nav] = [];
     navGroups[nav].push({ catId, category });
   });
-
-  // Render each nav group as a visual container
-  const navDescriptions = {
-    'Stellensuche': 'Berufsfelder, Ausbildungsgrad & Standorte',
-    'Lohnrechner': 'Interaktives Tool',
-    'Ratgeber': 'Lohn, Berufsbilder & Arbeitswelt',
-    'Über uns': 'Corporate, Standorte & Partnerschaften'
-  };
 
   Object.entries(navGroups).forEach(([navName, categories]) => {
     const group = document.createElement('div');
@@ -379,16 +471,11 @@ function createCategorySection(catId, category) {
   const grid = document.createElement('div');
   grid.className = 'cards-grid';
 
-  // Nur Header zeigen wenn Kategoriename != navContext (sonst doppelt)
   const showHeader = category.name !== category.navContext;
   if (showHeader) {
     const header = document.createElement('div');
     header.className = 'category-header';
-    header.innerHTML = `
-      <span class="toggle-icon">&#9660;</span>
-      <h2>${category.name}</h2>
-      <span class="category-badge">${category.pages.length} Seiten</span>
-    `;
+    header.innerHTML = '<span class="toggle-icon">&#9660;</span><h2>' + category.name + '</h2><span class="category-badge">' + category.pages.length + ' Seiten</span>';
     header.addEventListener('click', () => {
       header.classList.toggle('collapsed');
       grid.classList.toggle('collapsed');
@@ -396,7 +483,6 @@ function createCategorySection(catId, category) {
     section.appendChild(header);
   }
 
-  // Render: aufeinanderfolgende gleiche Typen gruppieren
   let currentContainer = null;
   let currentType = null;
 
