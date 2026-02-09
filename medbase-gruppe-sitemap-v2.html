@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sitemap V2 | Medbase Gruppe</title>
+  <style>
+:root {
+  --color-berufsfelder: #0D9488;
+  --color-berufsfelder-light: #F0FDFA;
+  --color-ausbildungsgrad: #16A34A;
+  --color-ausbildungsgrad-light: #F0FDF4;
+  --color-praxisstellen: #2563EB;
+  --color-praxisstellen-light: #EFF6FF;
+  --color-lohnrechner: #DB2777;
+  --color-lohnrechner-light: #FDF2F8;
+  --color-ratgeber: #EA580C;
+  --color-ratgeber-light: #FFF7ED;
+  --color-arbeitswelt: #7C3AED;
+  --color-arbeitswelt-light: #F5F3FF;
+  --color-corporate: #D97706;
+  --color-corporate-light: #FFFBEB;
+  --color-bg: #F8FAFC;
+  --color-card-bg: #FFFFFF;
+  --color-text: #0F172A;
+  --color-text-light: #64748B;
+  --color-border: #E2E8F0;
+  --color-shadow: rgba(15, 23, 42, 0.08);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size:15px; line-height:1.5; color:var(--color-text); background:var(--color-bg); }
+
+.header { background: linear-gradient(135deg, #1e3a5f 0%, #2563EB 100%); color:white; padding: 1.5rem 2rem; text-align:center; }
+.header h1 { margin:0 0 4px; font-size:1.6rem; font-weight:700; }
+.header h1 span { opacity:.7; font-weight:400; }
+.header p { margin:0; opacity:.85; font-size:.9rem; }
+.version-badge { display:inline-block; background:rgba(255,255,255,.2); padding:2px 10px; border-radius:10px; font-size:.7rem; font-weight:600; margin-top:6px; }
+
+.main-nav { display:flex; justify-content:center; gap:2px; padding:0; background:#1e3a5f; }
+.main-nav-item { padding:10px 24px; color:rgba(255,255,255,.7); font-size:.82rem; font-weight:600; text-transform:uppercase; letter-spacing:.03em; border-bottom:3px solid transparent; }
+.main-nav-item.active { color:#fff; border-bottom-color:#fff; }
+
+.main-content { max-width:1400px; margin:0 auto; padding:1.5rem; }
+
+.nav-group { background:var(--color-card-bg); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:1rem 1.25rem; margin-bottom:1.5rem; box-shadow:0 1px 4px var(--color-shadow); }
+.nav-group-header { font-size:.95rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--color-text); margin:0 0 1rem; padding-bottom:0.5rem; border-bottom:2px solid var(--color-border); }
+.nav-group-header span { font-weight:400; color:var(--color-text-light); font-size:.75rem; text-transform:none; letter-spacing:0; margin-left:0.5rem; }
+
+.category-section { margin-bottom:1rem; }
+.category-section:last-child { margin-bottom:0; }
+.category-header { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem; cursor:pointer; user-select:none; }
+.category-header h2 { margin:0; font-size:1.1rem; font-weight:600; }
+.category-header .toggle-icon { transition:transform 200ms ease; font-size:.8rem; }
+.category-header.collapsed .toggle-icon { transform:rotate(-90deg); }
+.category-badge { padding:2px 8px; border-radius:var(--radius-sm); font-size:.6rem; font-weight:600; text-transform:uppercase; letter-spacing:.04em; }
+
+.category-section[data-category="berufsfelder"] .category-header h2 { color:var(--color-berufsfelder); }
+.category-section[data-category="berufsfelder"] .category-badge { background:var(--color-berufsfelder-light); color:var(--color-berufsfelder); }
+.category-section[data-category="ausbildungsgrad"] .category-header h2 { color:var(--color-ausbildungsgrad); }
+.category-section[data-category="ausbildungsgrad"] .category-badge { background:var(--color-ausbildungsgrad-light); color:var(--color-ausbildungsgrad); }
+.category-section[data-category="praxisstellen"] .category-header h2 { color:var(--color-praxisstellen); }
+.category-section[data-category="praxisstellen"] .category-badge { background:var(--color-praxisstellen-light); color:var(--color-praxisstellen); }
+.category-section[data-category="lohnrechner"] .category-header h2 { color:var(--color-lohnrechner); }
+.category-section[data-category="lohnrechner"] .category-badge { background:var(--color-lohnrechner-light); color:var(--color-lohnrechner); }
+.category-section[data-category="ratgeber"] .category-header h2 { color:var(--color-ratgeber); }
+.category-section[data-category="ratgeber"] .category-badge { background:var(--color-ratgeber-light); color:var(--color-ratgeber); }
+.category-section[data-category="arbeitswelt"] .category-header h2 { color:var(--color-arbeitswelt); }
+.category-section[data-category="arbeitswelt"] .category-badge { background:var(--color-arbeitswelt-light); color:var(--color-arbeitswelt); }
+.category-section[data-category="corporate"] .category-header h2 { color:var(--color-corporate); }
+.category-section[data-category="corporate"] .category-badge { background:var(--color-corporate-light); color:var(--color-corporate); }
+
+.cards-grid { display:flex; flex-direction:column; gap:0.5rem; }
+.cards-grid.collapsed { display:none; }
+
+.hierarchy-hauptseite { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:8px; margin-bottom:0.75rem; }
+.hierarchy-group { margin-bottom:0.75rem; }
+.hierarchy-group-title { font-size:.6rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--color-text-light); margin-bottom:6px; padding-left:6px; }
+.hierarchy-unterseiten { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:8px; padding-left:1.5rem; border-left:3px solid var(--color-border); margin-left:0.5rem; }
+
+.page-card { background:var(--color-card-bg); border-radius:var(--radius-md); box-shadow:0 1px 4px var(--color-shadow); overflow:hidden; transition:transform 150ms ease, box-shadow 150ms ease; padding:10px 14px; }
+.page-card:hover { transform:translateY(-1px); box-shadow:0 3px 10px var(--color-shadow); }
+
+.page-card[data-type="hauptseite"] { border-left:5px solid; }
+.page-card[data-type="hauptseite"] .card-title { font-size:1rem; }
+.page-card[data-type="hauptseite"][data-category="berufsfelder"] { border-left-color:var(--color-berufsfelder); background:linear-gradient(135deg, #fff 0%, var(--color-berufsfelder-light) 100%); }
+.page-card[data-type="hauptseite"][data-category="ausbildungsgrad"] { border-left-color:var(--color-ausbildungsgrad); background:linear-gradient(135deg, #fff 0%, var(--color-ausbildungsgrad-light) 100%); }
+.page-card[data-type="hauptseite"][data-category="praxisstellen"] { border-left-color:var(--color-praxisstellen); background:linear-gradient(135deg, #fff 0%, var(--color-praxisstellen-light) 100%); }
+.page-card[data-type="hauptseite"][data-category="lohnrechner"] { border-left-color:var(--color-lohnrechner); background:linear-gradient(135deg, #fff 0%, var(--color-lohnrechner-light) 100%); }
+.page-card[data-type="hauptseite"][data-category="ratgeber"] { border-left-color:var(--color-ratgeber); background:linear-gradient(135deg, #fff 0%, var(--color-ratgeber-light) 100%); }
+.page-card[data-type="hauptseite"][data-category="arbeitswelt"] { border-left-color:var(--color-arbeitswelt); background:linear-gradient(135deg, #fff 0%, var(--color-arbeitswelt-light) 100%); }
+.page-card[data-type="hauptseite"][data-category="corporate"] { border-left-color:var(--color-corporate); background:linear-gradient(135deg, #fff 0%, var(--color-corporate-light) 100%); }
+
+.page-card[data-type="unterseite"] { border-top:3px solid; }
+.page-card[data-type="unterseite"] .card-title { font-size:.85rem; }
+.page-card[data-type="unterseite"][data-category="berufsfelder"] { border-top-color:var(--color-berufsfelder); }
+.page-card[data-type="unterseite"][data-category="ausbildungsgrad"] { border-top-color:var(--color-ausbildungsgrad); }
+.page-card[data-type="unterseite"][data-category="praxisstellen"] { border-top-color:var(--color-praxisstellen); }
+.page-card[data-type="unterseite"][data-category="lohnrechner"] { border-top-color:var(--color-lohnrechner); }
+.page-card[data-type="unterseite"][data-category="ratgeber"] { border-top-color:var(--color-ratgeber); }
+.page-card[data-type="unterseite"][data-category="arbeitswelt"] { border-top-color:var(--color-arbeitswelt); }
+.page-card[data-type="unterseite"][data-category="corporate"] { border-top-color:var(--color-corporate); }
+
+.card-title { margin:0; font-weight:600; color:var(--color-text); }
+.card-subtitle { font-size:.72rem; color:var(--color-text-light); margin-top:2px; font-style:italic; }
+
+.children-pills { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+.child-pill { display:inline-block; padding:2px 8px; border-radius:10px; font-size:.65rem; background:#F1F5F9; color:var(--color-text-light); border:1px solid var(--color-border); }
+.page-card.usw-card { background:var(--color-bg); border-style:dashed !important; opacity:.7; font-style:italic; }
+.location-pills { display:flex; flex-wrap:wrap; gap:4px; margin-top:4px; }
+.loc-pill { display:inline-block; padding:2px 8px; border-radius:10px; font-size:.62rem; background:#EFF6FF; color:#2563EB; border:1px solid #BFDBFE; }
+
+.subpages-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:5px; margin-top:8px; padding-top:8px; border-top:1px solid var(--color-border); }
+.subpage-card { background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-sm); padding:5px 10px; font-size:.72rem; font-weight:500; color:var(--color-text); }
+.subpage-label { font-size:.58rem; text-transform:uppercase; letter-spacing:.04em; color:var(--color-text-light); margin-bottom:2px; }
+
+@media (max-width:768px) {
+  .header h1 { font-size:1.2rem; }
+  .main-nav { flex-wrap:wrap; }
+  .main-nav-item { padding:8px 14px; font-size:.72rem; }
+  .hierarchy-hauptseite { grid-template-columns:1fr; }
+  .hierarchy-unterseiten { grid-template-columns:1fr; }
+}
+
+@media print {
+  .main-nav { display:none !important; }
+  .cards-grid.collapsed { display:flex !important; }
+  .page-card { break-inside:avoid; box-shadow:none; border:1px solid var(--color-border); }
+}
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <h1>Medbase Gruppe <span>| Sitemap</span></h1>
+  <p>Karriere & Corporate Website &mdash; Kickoff 11.02.2026</p>
+  <div class="version-badge">VARIANTE 2 &mdash; Berufsfelder nach Berufsgruppen</div>
+</header>
+
+<div class="main-nav">
+  <div class="main-nav-item active">Stellensuche</div>
+  <div class="main-nav-item">Lohnrechner</div>
+  <div class="main-nav-item">Ratgeber</div>
+  <div class="main-nav-item">&Uuml;ber uns</div>
+</div>
+
+<main class="main-content">
+  <div id="sitemap-container"></div>
+</main>
+
+<script>
+const pageData = {
+
+  berufsfelder: {
+    name: 'Berufsfelder',
+    navContext: 'Stellensuche',
+    pages: [
+      {
+        name: '\u00c4rztin / Arzt', type: 'Hauptseite',
+        subtitle: '~50 offene Stellen',
+        children: ['Allgemeine Innere Medizin', 'Dermatologie', 'Gyn\u00e4kologie & Geburtshilfe', 'Kardiologie', 'Rheumatologie', 'Psychiatrie & Psychotherapie', 'Ophthalmologie', 'P\u00e4diatrie', 'Physikalische Medizin & Rehabilitation', 'usw.'],
+        locations: ['Z\u00fcrich', 'Basel', 'Bern', 'Winterthur', 'usw.']
+      },
+      {
+        name: 'Medizinische:r Praxisassistent:in (MPA)', type: 'Hauptseite',
+        subtitle: '~30 offene Stellen',
+        children: ['Praxisassistenz Allgemein', 'Fachbereich Gyn\u00e4kologie', 'Fachbereich Kardiologie', 'Teamleitung / Praxiskoordination', 'usw.'],
+        locations: ['Z\u00fcrich', 'Winterthur', 'Baden', 'Schaffhausen', 'usw.']
+      },
+      {
+        name: 'Therapeut:in', type: 'Hauptseite',
+        subtitle: '~5 offene Stellen',
+        children: ['Physiotherapie', 'Psychotherapie', 'Ergotherapie', 'usw.'],
+        locations: ['Basel', 'Wil', 'St. Gallen', 'Bern', 'usw.']
+      },
+      {
+        name: 'Apotheker:in', type: 'Hauptseite',
+        subtitle: '~15 offene Stellen',
+        children: ['Offizin-Apotheker:in', 'Gesch\u00e4ftsf\u00fchrende:r Apotheker:in', 'BAB / FPH-Weiterbildung', 'Koordination Apotheke', 'usw.'],
+        locations: ['Bern', 'Basel', 'Winterthur', 'Meiringen', 'usw.']
+      },
+      {
+        name: 'Fachfrau / Fachmann Apotheke', type: 'Hauptseite',
+        subtitle: '~15 offene Stellen',
+        children: ['Fachperson Apotheke', 'Pharma-Assistenz', 'Produktion / Dailymed', 'Drogist:in', 'usw.'],
+        locations: ['Z\u00fcrich', 'St. Gallen', 'Aarau', 'Uster', 'usw.']
+      },
+      {
+        name: 'Hauptsitz-Mitarbeitende', type: 'Hauptseite',
+        subtitle: 'Corporate & Management',
+        children: ['Leitung Medical Center', 'Business Development', 'Marketing & Merchandising', 'Digital & Content', 'Regionenleitung', 'usw.'],
+        locations: ['Winterthur', 'Frauenfeld', 'usw.']
+      },
+      {
+        name: 'Lehrberufe', type: 'Hauptseite',
+        subtitle: 'Lehrstellen & Apprentissages',
+        children: ['Fachfrau / Fachmann Apotheke EFZ', 'Med. Praxisassistent:in EFZ', 'Dentalassistent:in EFZ', 'usw.'],
+        locations: ['Oensingen', 'Thun', 'Reinach', 'Allschwil', 'Gampelen', 'usw.']
+      }
+    ]
+  },
+
+  ausbildungsgrad: {
+    name: 'Stellensuche nach Ausbildungsgrad',
+    navContext: 'Stellensuche',
+    pages: [
+      {
+        name: 'Lehrstellen', type: 'Unterseite',
+        children: ['MPA', 'Pharma-Assistent:in', 'Dentalassistent:in'],
+        locations: ['Z\u00fcrich', 'Luzern', 'St. Gallen', 'usw.']
+      },
+      {
+        name: 'Schnupperlehre', type: 'Unterseite',
+        locations: ['Z\u00fcrich', 'Luzern', 'usw.']
+      },
+      {
+        name: 'Quereinsteiger:in', type: 'Unterseite',
+        children: ['MPA', 'Physiotherapie', 'Gesundheitswesen'],
+        locations: ['Z\u00fcrich', 'Basel', 'usw.']
+      },
+      {
+        name: 'Praktikum', type: 'Unterseite',
+        children: ['MPA', 'Zahn\u00e4rzt:in', 'usw.'],
+        locations: ['Z\u00fcrich', 'Luzern', 'usw.']
+      },
+      {
+        name: 'Ausbildung', type: 'Unterseite',
+        children: ['Physiotherapeut:in', 'FaGe', 'MPA', 'Arzthelfer:in', 'usw.']
+      },
+      {
+        name: 'Weiterbildung', type: 'Unterseite',
+        children: ['FPH Offizin by Medbase', 'Physiotherapeut:in', 'FaGe', 'MPA']
+      },
+      { name: 'Teamleitung', type: 'Unterseite' },
+      { name: 'Gesch\u00e4ftsleitung', type: 'Unterseite' }
+    ]
+  },
+
+  praxisstellen: {
+    name: 'Praxisstellen nach Standort',
+    navContext: 'Stellensuche',
+    pages: [
+      { name: 'Z\u00fcrich', type: 'Unterseite' },
+      { name: 'Luzern', type: 'Unterseite' },
+      { name: 'Basel', type: 'Unterseite' },
+      { name: 'St. Gallen', type: 'Unterseite' },
+      { name: 'Bern', type: 'Unterseite' },
+      { name: 'Winterthur', type: 'Unterseite' },
+      { name: 'usw.', type: 'Unterseite' }
+    ]
+  },
+
+  lohnrechner: {
+    name: 'Lohnrechner',
+    navContext: 'Lohnrechner',
+    pages: [
+      {
+        name: 'Lohnrechner Gesundheitswesen', type: 'Hauptseite',
+        subtitle: 'Interaktives Tool'
+      }
+    ]
+  },
+
+  ratgeber: {
+    name: 'Ratgeber',
+    navContext: 'Ratgeber',
+    pages: [
+      { name: 'Lohn & Sal\u00e4r', type: 'Hauptseite' },
+      { name: 'Lohn MPA', type: 'Unterseite' },
+      { name: 'Lohn FaGe', type: 'Unterseite' },
+      { name: 'Lohn Dentalassistent:in', type: 'Unterseite' },
+      { name: 'Lohn Pharma-Assistent:in', type: 'Unterseite' },
+      { name: 'Lohn Zahn\u00e4rzt:in', type: 'Unterseite' },
+      { name: 'Lohn Physiotherapeut:in', type: 'Unterseite' },
+      { name: 'Lohn Apotheker:in', type: 'Unterseite' },
+      { name: 'usw.', type: 'Unterseite' },
+      { name: 'Berufsbilder', type: 'Hauptseite' },
+      { name: 'Berufsbild FaGe', type: 'Unterseite' },
+      { name: 'Berufsbild MPA', type: 'Unterseite' },
+      { name: 'Berufsbild Physiotherapeut:in', type: 'Unterseite' },
+      { name: 'Berufsbild Apotheker:in', type: 'Unterseite' },
+      { name: 'Berufsbild Zahn\u00e4rzt:in', type: 'Unterseite' },
+      { name: 'Berufsbild Arztsekret\u00e4r:in', type: 'Unterseite' },
+      { name: 'usw.', type: 'Unterseite' }
+    ]
+  },
+
+  arbeitswelt: {
+    name: 'Arbeitswelt',
+    navContext: 'Ratgeber',
+    pages: [
+      {
+        name: 'Sicherheit & Fairness', type: 'Unterseite',
+        subtitle: 'Kann ich hier sorgenfrei arbeiten?',
+        children: ['Lohn & Lohntransparenz', 'Zulagen (Nacht, Wochenende, Pikett)', 'GAV / faire Vertr\u00e4ge', 'Arbeitszeiten & Dienstplanung', 'Pensum-Flexibilit\u00e4t', 'Arbeitsplatzsicherheit']
+      },
+      {
+        name: 'Alltag & Belastbarkeit', type: 'Unterseite',
+        subtitle: 'Wie f\u00fchlt sich ein normaler Arbeitstag an?',
+        children: ['Arbeitsbelastung', 'Personalschl\u00fcssel', 'Schichtmodelle vs. fixe Zeiten', 'Pausen, Erholung, \u00dcberstunden', 'Burnout-Pr\u00e4vention', 'Vereinbarkeit Familie / Beruf']
+      },
+      {
+        name: 'Sinn & Identifikation', type: 'Unterseite',
+        subtitle: 'Warum sollte ich hier arbeiten \u2013 und bleiben?',
+        children: ['Patientenzentrierung', 'Werte & Haltung', 'Qualit\u00e4t & Sicherheit', 'Beitrag zur Gesellschaft', 'Nachhaltigkeit', 'Ethik']
+      },
+      {
+        name: 'Entwicklung & Perspektive', type: 'Unterseite',
+        subtitle: 'Was bringt mir dieser Job in 3\u20135 Jahren?',
+        children: ['Weiterbildung (CAS, HF, FH)', 'Karrierepfade', 'Rollenwechsel (z.B. Pflege \u2192 QM)', 'Talentf\u00f6rderung', 'Laufbahnmodelle']
+      },
+      {
+        name: 'Team & F\u00fchrung', type: 'Unterseite',
+        subtitle: 'Mit wem arbeite ich \u2013 und wie werde ich gef\u00fchrt?',
+        children: ['Teamkultur', 'Interprofessionalit\u00e4t', 'F\u00fchrungsstil', 'Feedbackkultur', 'Mitbestimmung', 'Psychologische Sicherheit']
+      },
+      {
+        name: 'Organisation & Rahmen', type: 'Unterseite',
+        subtitle: 'Wie modern und professionell ist der Arbeitgeber?',
+        children: ['Prozesse & Organisation', 'Digitalisierung', 'Innovation']
+      }
+    ]
+  },
+
+  corporate: {
+    name: '\u00dcber uns',
+    navContext: '\u00dcber uns',
+    pages: [
+      { name: 'Medbase Gruppe', type: 'Unterseite' },
+      { name: 'Markenportfolio', type: 'Unterseite' },
+      { name: 'Gesch\u00e4ftsleitung', type: 'Unterseite' },
+      { name: 'Managed Care', type: 'Unterseite' },
+      { name: 'Integrierte Versorgung', type: 'Unterseite' },
+      { name: 'Equal Pay / WE PAY FAIR', type: 'Unterseite' },
+      { name: 'Jahresbericht', type: 'Unterseite' },
+      { name: 'Partnerschaften', type: 'Unterseite' },
+      { name: 'Work-Life-Balance (optional)', type: 'Unterseite' },
+      {
+        name: 'Standorte', type: 'Unterseite',
+        subtitle: '188 Standorte gesamt',
+        subpages: ['Portrait Apotheke Aarau Telli', 'Portrait Medbase Apotheke Abtwil', 'Portrait Medbase Basel', 'Portrait Medbase Bern Bahnhof', 'Portrait Medbase Oerlikon', 'usw.']
+      }
+    ]
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderSitemap();
+});
+
+function renderSitemap() {
+  const container = document.getElementById('sitemap-container');
+  container.innerHTML = '';
+
+  // Group categories by navContext
+  const navGroups = {};
+  Object.entries(pageData).forEach(([catId, category]) => {
+    const nav = category.navContext || 'Sonstige';
+    if (!navGroups[nav]) navGroups[nav] = [];
+    navGroups[nav].push({ catId, category });
+  });
+
+  // Render each nav group as a visual container
+  const navDescriptions = {
+    'Stellensuche': 'Berufsfelder, Ausbildungsgrad & Standorte',
+    'Lohnrechner': 'Interaktives Tool',
+    'Ratgeber': 'Lohn, Berufsbilder & Arbeitswelt',
+    '\u00dcber uns': 'Corporate, Standorte & Partnerschaften'
+  };
+
+  Object.entries(navGroups).forEach(([navName, categories]) => {
+    const group = document.createElement('div');
+    group.className = 'nav-group';
+
+    const header = document.createElement('h2');
+    header.className = 'nav-group-header';
+    header.innerHTML = navName + (navDescriptions[navName] ? '<span>' + navDescriptions[navName] + '</span>' : '');
+    group.appendChild(header);
+
+    categories.forEach(({ catId, category }) => {
+      group.appendChild(createCategorySection(catId, category));
+    });
+
+    container.appendChild(group);
+  });
+}
+
+function createCategorySection(catId, category) {
+  const section = document.createElement('section');
+  section.className = 'category-section';
+  section.dataset.category = catId;
+
+  const grid = document.createElement('div');
+  grid.className = 'cards-grid';
+
+  // Nur Header zeigen wenn Kategoriename != navContext (sonst doppelt)
+  const showHeader = category.name !== category.navContext;
+  if (showHeader) {
+    const header = document.createElement('div');
+    header.className = 'category-header';
+    header.innerHTML = `
+      <span class="toggle-icon">&#9660;</span>
+      <h2>${category.name}</h2>
+      <span class="category-badge">${category.pages.length} Seiten</span>
+    `;
+    header.addEventListener('click', () => {
+      header.classList.toggle('collapsed');
+      grid.classList.toggle('collapsed');
+    });
+    section.appendChild(header);
+  }
+
+  // Render: aufeinanderfolgende gleiche Typen gruppieren
+  let currentContainer = null;
+  let currentType = null;
+
+  category.pages.forEach(p => {
+    if (p.type !== currentType) {
+      currentType = p.type;
+      if (p.type === 'Hauptseite') {
+        currentContainer = document.createElement('div');
+        currentContainer.className = 'hierarchy-hauptseite';
+        grid.appendChild(currentContainer);
+      } else {
+        const grp = document.createElement('div');
+        grp.className = 'hierarchy-group';
+        currentContainer = document.createElement('div');
+        currentContainer.className = 'hierarchy-unterseiten';
+        grp.appendChild(currentContainer);
+        grid.appendChild(grp);
+      }
+    }
+    currentContainer.appendChild(createCard(catId, p));
+  });
+
+  section.appendChild(grid);
+  return section;
+}
+
+function createCard(catId, page) {
+  const card = document.createElement('article');
+  card.className = 'page-card';
+  card.dataset.category = catId;
+  card.dataset.type = page.type.toLowerCase();
+
+  if (page.name === 'usw.') card.classList.add('usw-card');
+
+  let html = '<h3 class="card-title">' + esc(page.name) + '</h3>';
+
+  if (page.subtitle) {
+    html += '<div class="card-subtitle">\u00AB' + esc(page.subtitle) + '\u00BB</div>';
+  }
+
+  if (page.children && page.children.length > 0) {
+    html += '<div class="children-pills">' + page.children.map(c => '<span class="child-pill">' + esc(c) + '</span>').join('') + '</div>';
+  }
+
+  if (page.locations && page.locations.length > 0) {
+    html += '<div class="location-pills">' + page.locations.map(l => '<span class="loc-pill">' + esc(l) + '</span>').join('') + '</div>';
+  }
+
+  if (page.subpages && page.subpages.length > 0) {
+    html += '<div class="subpages-grid"><div class="subpage-label">Unterseiten (je eine eigene Seite)</div>' + page.subpages.map(s => '<div class="subpage-card">' + esc(s) + '</div>').join('') + '</div>';
+  }
+
+  card.innerHTML = html;
+  return card;
+}
+
+function esc(t) {
+  if (!t) return '';
+  const d = document.createElement('div');
+  d.textContent = t;
+  return d.innerHTML;
+}
+</script>
+
+</body>
+</html>
