@@ -77,7 +77,7 @@ Lohnrechner Gesundheitswesen (Interaktives Tool)
 RATGEBER
 ========
 
-Lohn & Gehalt
+Lohn & Salär
   Lohn MPA
   Lohn FaGe
   Lohn Dentalassistent:in
