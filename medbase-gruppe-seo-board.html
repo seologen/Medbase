@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medbase Gruppe - Strukturvorschlag Karrierebereich</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0f1117;color:#e1e4e8;min-height:100vh}
+
+  .header{background:linear-gradient(135deg,#1a1d27 0%,#252936 100%);padding:24px 32px;border-bottom:1px solid #2d3348;display:flex;justify-content:space-between;align-items:center}
+  .header h1{font-size:22px;font-weight:600;color:#fff}
+  .header h1 span{color:#4f8ff7}
+  .header .meta{font-size:13px;color:#8b8fa3}
+  .header .badge{background:#4f8ff7;color:#fff;padding:4px 12px;border-radius:12px;font-size:11px;font-weight:600;margin-left:12px}
+
+  .content{padding:24px 32px;max-width:1600px;margin:0 auto}
+
+  .grid{display:grid;gap:16px}
+  .grid-2{grid-template-columns:1fr 1fr}
+  .grid-3{grid-template-columns:1fr 1fr 1fr}
+  .grid-4{grid-template-columns:1fr 1fr 1fr 1fr}
+  .grid-5{grid-template-columns:1fr 1fr 1fr 1fr 1fr}
+
+  .card{background:#1a1d27;border:1px solid #2d3348;border-radius:10px;padding:20px}
+  .card h3{font-size:14px;font-weight:600;color:#c9cdd8;margin-bottom:12px}
+  .card h2{font-size:13px;font-weight:600;color:#8b8fa3;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px}
+  .card.highlight{border-color:#4f8ff7;border-width:2px}
+  .card.highlight-green{border-color:#34d399;border-width:2px}
+  .card.highlight-orange{border-color:#f59e0b;border-width:2px}
+
+  .kpi{text-align:center;padding:24px 16px}
+  .kpi .value{font-size:32px;font-weight:700;color:#fff;margin-bottom:4px}
+  .kpi .label{font-size:12px;color:#8b8fa3}
+  .kpi .sub{font-size:11px;color:#6b7084;margin-top:4px}
+  .kpi.blue .value{color:#4f8ff7}
+  .kpi.green .value{color:#34d399}
+  .kpi.orange .value{color:#f59e0b}
+  .kpi.red .value{color:#ef4444}
+  .kpi.purple .value{color:#a78bfa}
+
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;padding:10px 12px;color:#8b8fa3;font-weight:500;border-bottom:1px solid #2d3348;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+  td{padding:10px 12px;border-bottom:1px solid #1e2235;color:#c9cdd8}
+  tr:hover td{background:#1e2235}
+
+  .sv{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;min-width:32px;text-align:center}
+  .sv.high{background:#064e3b;color:#34d399}
+  .sv.mid{background:#1e3a5f;color:#60a5fa}
+  .sv.low{background:#3b2f1e;color:#f59e0b}
+  .sv.none{background:#2d2d3d;color:#6b7084}
+
+  .tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:500;margin:2px}
+  .tag.blue{background:#1e293b;color:#60a5fa}
+  .tag.green{background:#1e3b2a;color:#34d399}
+  .tag.orange{background:#3b2f1e;color:#f59e0b}
+  .tag.red{background:#3b1e1e;color:#f87171}
+  .tag.purple{background:#2d1e3b;color:#a78bfa}
+
+  .bar-container{display:flex;align-items:center;gap:8px}
+  .bar{height:8px;border-radius:4px;min-width:2px}
+  .bar.blue{background:#4f8ff7}
+  .bar.green{background:#34d399}
+  .bar.orange{background:#f59e0b}
+  .bar.purple{background:#a78bfa}
+  .bar.red{background:#ef4444}
+  .bar-label{font-size:11px;color:#8b8fa3;min-width:50px;text-align:right}
+
+  .section{margin-bottom:28px}
+  .section-title{font-size:16px;font-weight:600;color:#fff;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .section-title .dot{width:8px;height:8px;border-radius:50%}
+  .section-title .dot.blue{background:#4f8ff7}
+  .section-title .dot.green{background:#34d399}
+  .section-title .dot.orange{background:#f59e0b}
+  .section-title .dot.red{background:#ef4444}
+  .section-title .dot.purple{background:#a78bfa}
+
+  .tree{font-size:13px;line-height:1.9;font-family:'Cascadia Code','Fira Code','Consolas',monospace}
+  .tree .folder{color:#4f8ff7;font-weight:600}
+  .tree .page{color:#c9cdd8}
+  .tree .comment{color:#6b7084;font-style:italic}
+  .tree .sv-tag{color:#34d399;font-weight:600;font-size:11px}
+  .tree .jobs-tag{color:#f59e0b;font-size:11px}
+  .tree .new{color:#a78bfa;font-weight:600;font-size:10px;text-transform:uppercase;background:#2d1e3b;padding:1px 6px;border-radius:3px;margin-left:4px}
+  .tree .hot{color:#ef4444;font-weight:600;font-size:10px;text-transform:uppercase;background:#3b1e1e;padding:1px 6px;border-radius:3px;margin-left:4px}
+  .tree .lp{color:#60a5fa;font-size:10px;background:#1e293b;padding:1px 6px;border-radius:3px;margin-left:4px}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;padding:12px 16px;background:#161822;border-radius:8px;border:1px solid #2d3348}
+  .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:#8b8fa3}
+  .legend-dot{width:10px;height:10px;border-radius:3px}
+
+  .note{background:#161822;border:1px solid #2d3348;border-radius:8px;padding:14px 18px;font-size:12px;color:#8b8fa3;line-height:1.7;margin-top:12px}
+  .note strong{color:#c9cdd8}
+
+  .jobs-badge{display:inline-block;background:#3b2f1e;color:#f59e0b;font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;margin-left:4px}
+  .sv-badge{display:inline-block;background:#064e3b;color:#34d399;font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;margin-left:4px}
+
+  h4{font-size:13px;font-weight:600;color:#8b8fa3;margin:16px 0 8px;text-transform:uppercase;letter-spacing:.5px}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+
+  @media(max-width:1200px){.grid-4,.grid-5{grid-template-columns:1fr 1fr}.two-col,.three-col{grid-template-columns:1fr}}
+  @media(max-width:800px){.grid-2,.grid-3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>Medbase <span>Gruppe</span> &mdash; Strukturvorschlag Karrierebereich<span class="badge">KICKOFF 11.02.2026</span></h1>
+  </div>
+  <div class="meta">Basierend auf 1'148 Keywords (Google KW Planner) + SISTRIX + 126 Workday-Stellen</div>
+</div>
+
+<div class="content">
+
+  <!-- KPIs -->
+  <div class="section">
+    <div class="grid grid-5">
+      <div class="card kpi blue">
+        <div class="value">1'148</div>
+        <div class="label">Keywords analysiert</div>
+        <div class="sub">Google KW Planner CH</div>
+      </div>
+      <div class="card kpi green">
+        <div class="value">126</div>
+        <div class="label">Aktuelle Workday-Stellen</div>
+        <div class="sub">7 Berufsgruppen aktiv</div>
+      </div>
+      <div class="card kpi orange">
+        <div class="value">~37'000</div>
+        <div class="label">Gesamt-SV/Mt Potenzial</div>
+        <div class="sub">19'100 Karriere + 17'550 Lohnrechner</div>
+      </div>
+      <div class="card kpi purple">
+        <div class="value">2 Achsen</div>
+        <div class="label">Berufsfeld + Hierarchie</div>
+        <div class="sub">Matrix-Struktur</div>
+      </div>
+      <div class="card kpi red">
+        <div class="value">0 Jobs</div>
+        <div class="label">FaGe, Zahnmed. &amp; QM</div>
+        <div class="sub">Trotz 4'600+980+110 SV/Mt</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEGENDE -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div> SV/Mt = Suchvolumen pro Monat</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div> Jobs = Aktuelle Workday-Stellen</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div> NEU = Neues Cluster (aus Excel-Analyse)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div> HOT = Hohes SV, noch keine Seite</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#60a5fa"></div> LP = Landing Page empfohlen</div>
+  </div>
+
+  <!-- DIMENSION 1: BERUFSFELDER -->
+  <div class="section">
+    <div class="section-title"><div class="dot blue"></div> Dimension 1: Berufsfelder (Fachliche Cluster)</div>
+
+    <div class="two-col">
+      <div class="card">
+        <h2>URL-Struktur /karriere/berufsfelder/</h2>
+        <div class="tree">
+<span class="folder">/karriere/</span><br>
+&nbsp;&nbsp;<span class="folder">/berufsfelder/</span> <span class="comment">&larr; Uebersichtsseite alle Berufe</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/aerzte/</span> <span class="sv-tag">210 SV</span> <span class="jobs-tag">52 Jobs</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/allgemeine-innere-medizin/</span> <span class="jobs-tag">33 Jobs</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/dermatologie/</span> <span class="sv-tag">50 SV</span> <span class="jobs-tag">5 Jobs</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/gynaekologie/</span> <span class="jobs-tag">4 Jobs</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/kardiologie/</span> <span class="jobs-tag">2 Jobs</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/rheumatologie/</span> <span class="jobs-tag">2 Jobs</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/ophthalmologie/</span> <span class="jobs-tag">1 Job</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/paediatrie/</span> <span class="jobs-tag">1 Job</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/assistenzarzt/</span> <span class="sv-tag">260 SV</span> <span class="lp">LP</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/fage/</span> <span class="sv-tag">4'600 SV</span> <span class="jobs-tag">0 Jobs</span> <span class="hot">HOT</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"fachfrau gesundheit" 1'150 + "fage stellen" 750 + "fage jobs" 450 + "fage ausbildung" 950 + "fage lohn" 550</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">Groesstes Einzelcluster! Aber: FaGe = eher Pflege-Kontext. Pruefen ob Medbase FaGe anstellt.</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/mpa/</span> <span class="sv-tag">1'000 SV</span> <span class="jobs-tag">30 Jobs</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/zuerich/</span> <span class="sv-tag">390 SV</span> <span class="lp">LP</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/luzern/</span> <span class="sv-tag">480 SV</span> <span class="lp">LP</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/basel/</span> <span class="sv-tag">320 SV</span> <span class="lp">LP</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/bern/</span> <span class="sv-tag">200 SV</span> <span class="lp">LP</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/aargau/</span> <span class="sv-tag">100 SV</span> <span class="lp">LP</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/schaffhausen/</span> <span class="sv-tag">80 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/winterthur/</span> <span class="sv-tag">30 SV</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/physiotherapie/</span> <span class="sv-tag">390 SV</span> <span class="jobs-tag">3 Jobs</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/sportphysiotherapie/</span> <span class="sv-tag">70 SV</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/apotheker/</span> <span class="sv-tag">210 SV</span> <span class="jobs-tag">11 Jobs</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/pharma-assistenz/</span> <span class="sv-tag">60 SV</span> <span class="jobs-tag">16 Jobs</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/zahnmedizin/</span> <span class="sv-tag">480 SV</span> <span class="jobs-tag">0 Jobs!</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/zahnarzt/</span> <span class="sv-tag">480 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/dentalassistentin/</span> <span class="sv-tag">500 SV</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/zuerich/</span> <span class="sv-tag">30 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/basel/</span> <span class="sv-tag">40 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/bern/</span> <span class="sv-tag">30 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/dentalhygienikerin/</span> <span class="sv-tag">20 SV</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/arztsekretaerin/</span> <span class="sv-tag">360 SV</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"spitalsekretaerin jobs" 110 + "arzt spitalsekretaerin" 110 + "arztsekretaerin" 80+60</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/sachbearbeiter-gesundheitswesen/</span> <span class="sv-tag">350 SV</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"sachbearbeiter gesundheitswesen" 260 + "sachbearbeiter gw jobs" 90</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/qualitaetsmanagement/</span> <span class="sv-tag">110 SV</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"qualitaetsmanagement jobs gesundheitswesen" 110</span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/apn/</span> <span class="sv-tag">180 SV</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"advanced practice nurse" 100 + "nurse practitioner schweiz" 80</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">Neues Berufsbild bei Medbase &ndash; Nurse Practitioners in Medical Centern</span><br>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Berufsfelder nach Suchvolumen &amp; Jobs</h2>
+        <table>
+          <tr><th>Berufsfeld</th><th>SV/Mt</th><th>Jobs</th><th>Anteil</th><th>SV-Balken</th></tr>
+          <tr style="background:#1e2235">
+            <td><strong>FaGe (Fachfrau Gesundheit)</strong> <span class="new">NEU</span></td>
+            <td><span class="sv high">4'600+</span></td>
+            <td style="color:#ef4444;font-weight:600">0!</td>
+            <td>0%</td>
+            <td><div class="bar-container"><div class="bar green" style="width:100%"></div></div></td>
+          </tr>
+          <tr>
+            <td><strong>MPA / Praxisassistenz</strong></td>
+            <td><span class="sv high">3'500+</span></td>
+            <td>30</td>
+            <td>24%</td>
+            <td><div class="bar-container"><div class="bar green" style="width:76%"></div></div></td>
+          </tr>
+          <tr>
+            <td><strong>Physiotherapie</strong></td>
+            <td><span class="sv high">2'400+</span></td>
+            <td>3</td>
+            <td>2%</td>
+            <td><div class="bar-container"><div class="bar green" style="width:69%"></div></div></td>
+          </tr>
+          <tr>
+            <td><strong>Aerzte / Assistenzaerzte</strong></td>
+            <td><span class="sv mid">1'200+</span></td>
+            <td>52</td>
+            <td>41%</td>
+            <td><div class="bar-container"><div class="bar blue" style="width:34%"></div></div></td>
+          </tr>
+          <tr>
+            <td><strong>Zahnmedizin</strong> (Zahnarzt + DA)</td>
+            <td><span class="sv mid">980+</span></td>
+            <td style="color:#ef4444;font-weight:600">0!</td>
+            <td>0%</td>
+            <td><div class="bar-container"><div class="bar blue" style="width:28%"></div></div></td>
+          </tr>
+          <tr>
+            <td><strong>Gesundheitswesen allgemein</strong></td>
+            <td><span class="sv mid">900+</span></td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td><div class="bar-container"><div class="bar blue" style="width:26%"></div></div></td>
+          </tr>
+          <tr>
+            <td><strong>Arztsekretaerin</strong> <span class="new">NEU</span></td>
+            <td><span class="sv low">360</span></td>
+            <td>6</td>
+            <td>5%</td>
+            <td><div class="bar-container"><div class="bar orange" style="width:10%"></div></div></td>
+          </tr>
+          <tr>
+            <td><strong>Sachbearbeiter GW</strong> <span class="new">NEU</span></td>
+            <td><span class="sv low">350</span></td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td><div class="bar-container"><div class="bar orange" style="width:10%"></div></div></td>
+          </tr>
+          <tr>
+            <td><strong>Apotheker</strong></td>
+            <td><span class="sv low">210</span></td>
+            <td>11</td>
+            <td>9%</td>
+            <td><div class="bar-container"><div class="bar orange" style="width:6%"></div></div></td>
+          </tr>
+          <tr>
+            <td><strong>QM Gesundheitswesen</strong> <span class="new">NEU</span></td>
+            <td><span class="sv low">110</span></td>
+            <td>0</td>
+            <td>0%</td>
+            <td><div class="bar-container"><div class="bar orange" style="width:3%"></div></div></td>
+          </tr>
+          <tr>
+            <td><strong>Pharma-Assistenz</strong></td>
+            <td><span class="sv none">60</span></td>
+            <td>16</td>
+            <td>13%</td>
+            <td><div class="bar-container"><div class="bar orange" style="width:2%"></div></div></td>
+          </tr>
+        </table>
+
+        <div class="note" style="margin-top:16px">
+          <strong>Insights:</strong><br>
+          &bull; <strong style="color:#ef4444">FaGe ist das groesste Cluster (4'600+ SV)</strong> aber 0 Jobs auf Workday &rarr; Klaerung noetig!<br>
+          &bull; MPA hat hoechstes SV+Jobs-Verhaeltnis (3'500+ SV, 30 Jobs) &rarr; Top-Prioritaet<br>
+          &bull; Physiotherapie hat hohes SV (2'400+) aber nur 3 Jobs &rarr; Ausbildungscontent!<br>
+          &bull; Zahnmedizin hat 980 SV aber 0 Jobs &rarr; zahnarztzentrum.ch anbinden<br>
+          &bull; 4 neue Cluster: FaGe (4'600), Arztsekretaerin (360), Sachbearbeiter GW (350), QM GW (110)<br>
+          &bull; Kauffrau/Kaufmann GW (10 SV) und Gesundheitsokonom (10 SV) &rarr; zu wenig SV, nicht einplanen
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIMENSION 2: HIERARCHIE-STUFEN -->
+  <div class="section">
+    <div class="section-title"><div class="dot green"></div> Dimension 2: Hierarchie-Stufen (Karrierelevel)</div>
+
+    <div class="two-col">
+      <div class="card">
+        <h2>URL-Struktur /karriere/ (nach Hierarchie)</h2>
+        <div class="tree">
+<span class="folder">/karriere/</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/lehrstellen/</span> <span class="sv-tag">1'000+ SV</span> <span class="jobs-tag">11 Jobs</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/mpa/</span> <span class="sv-tag">50 SV</span> <span class="jobs-tag">5 Lehrstellen</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/pharma-assistenz/</span> <span class="sv-tag">10 SV</span> <span class="jobs-tag">4 Lehrstellen</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/dentalassistentin/</span> <span class="sv-tag">20 SV</span> <span class="jobs-tag">0</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"lehrstellen 2026" = 1'000 SV &rarr; jaehrlich aktualisieren!</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/quereinsteiger/</span> <span class="sv-tag">420+ SV</span> <span class="lp">LP</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/mpa/</span> <span class="sv-tag">180 SV</span> <span class="lp">LP</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"mpa quereinstieg" 110 + "quereinstieg mpa" 70</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/physiotherapie/</span> <span class="sv-tag">190 SV</span> <span class="lp">LP</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"physiotherapie quereinsteiger" 140 + "quereinstieg physio" 50</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/gesundheitswesen/</span> <span class="sv-tag">50 SV</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/ausbildung/</span> <span class="sv-tag">3'750+ SV</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/physiotherapeut/</span> <span class="sv-tag">1'000 SV</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/fage/</span> <span class="sv-tag">950 SV</span> <span class="hot">HOT</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/mpa/</span> <span class="sv-tag">110 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/arzthelferin/</span> <span class="sv-tag">110 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/sportphysiotherapeut/</span> <span class="sv-tag">70 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/gesundheitswesen/</span> <span class="sv-tag">480 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"zentrum fuer ausbildung im gesundheitswesen" 480</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/weiterbildung/</span> <span class="sv-tag">730+ SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/fph-offizin/</span> <span class="sv-tag">400 SV</span> <span class="hot">HOT</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"FPH Offizin by Medbase" &ndash; eigenes Weiterbildungsprogramm!</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/physiotherapeut/</span> <span class="sv-tag">140 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/fage/</span> <span class="sv-tag">100 SV</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/mpa/</span> <span class="sv-tag">90 SV</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/praktikum/</span> <span class="sv-tag">160 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/mpa/</span> <span class="sv-tag">160 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"praktikum mpa" 90 + "mpa praktikumsstellen" 70</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/teamleitung/</span> <span class="jobs-tag">13 Jobs</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">Kein relevantes eigenes SV &rarr; interne Verlinkung</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/geschaeftsleitung/</span> <span class="jobs-tag">6 Jobs</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">Kein relevantes eigenes SV &rarr; interne Verlinkung</span><br>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Hierarchie-Stufen nach SV &amp; Jobs</h2>
+        <table>
+          <tr><th>Karrierestufe</th><th>SV/Mt</th><th>Jobs</th><th>Anteil Jobs</th></tr>
+          <tr>
+            <td><strong>Ausbildung</strong> (Studium, FH, Schulen)</td>
+            <td><span class="sv high">2'800+</span></td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td><strong>Lehrstellen</strong></td>
+            <td><span class="sv high">1'000+</span></td>
+            <td>11</td>
+            <td>9%</td>
+          </tr>
+          <tr>
+            <td><strong>Quereinsteiger</strong></td>
+            <td><span class="sv low">420+</span></td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td><strong>Weiterbildung</strong> (inkl. FPH Offizin)</td>
+            <td><span class="sv mid">730+</span></td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+          </tr>
+          <tr>
+            <td><strong>Praktikum</strong></td>
+            <td><span class="sv low">160</span></td>
+            <td>1</td>
+            <td>1%</td>
+          </tr>
+          <tr>
+            <td><strong>Fachperson / Fachangestellte</strong></td>
+            <td><span class="sv none">&mdash;</span></td>
+            <td>102</td>
+            <td>81%</td>
+          </tr>
+          <tr>
+            <td><strong>Teamleitung / Fuehrung</strong></td>
+            <td><span class="sv none">&mdash;</span></td>
+            <td>13</td>
+            <td>10%</td>
+          </tr>
+          <tr>
+            <td><strong>Geschaeftsleitung / Management</strong></td>
+            <td><span class="sv none">&mdash;</span></td>
+            <td>6</td>
+            <td>5%</td>
+          </tr>
+        </table>
+
+        <div class="note" style="margin-top:16px">
+          <strong>Insights:</strong><br>
+          &bull; <strong>Ausbildung</strong> ist das groesste SV-Cluster (2'800+) &rarr; informationelle Inhalte<br>
+          &bull; <strong>"lehrstellen 2026"</strong> hat 1'000 SV &rarr; jaehrlich aktualisierbare LP<br>
+          &bull; <strong style="color:#ef4444">FPH Offizin by Medbase</strong> hat 400 SV &rarr; eigenes Weiterbildungsprogramm als LP!<br>
+          &bull; <strong>Quereinsteiger</strong> hat 420+ SV und eignet sich ideal fuer Employer Branding<br>
+          &bull; Teamleitung/GL haben wenig eigenes SV &rarr; eher ueber Filterfunktion loesen<br>
+          &bull; <strong>Praktikum MPA</strong> hat 160 SV &rarr; eigene Landing Page lohnt sich
+        </div>
+
+        <h4 style="margin-top:20px">Workday-Jobs nach Hierarchie</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+          <div style="flex:1;min-width:120px;background:#1e2235;padding:12px;border-radius:8px;text-align:center">
+            <div style="font-size:28px;font-weight:700;color:#4f8ff7">102</div>
+            <div style="font-size:11px;color:#8b8fa3;margin-top:4px">Fachpersonen</div>
+            <div style="font-size:10px;color:#6b7084">81%</div>
+          </div>
+          <div style="flex:1;min-width:120px;background:#1e2235;padding:12px;border-radius:8px;text-align:center">
+            <div style="font-size:28px;font-weight:700;color:#34d399">13</div>
+            <div style="font-size:11px;color:#8b8fa3;margin-top:4px">Teamleitung</div>
+            <div style="font-size:10px;color:#6b7084">10%</div>
+          </div>
+          <div style="flex:1;min-width:120px;background:#1e2235;padding:12px;border-radius:8px;text-align:center">
+            <div style="font-size:28px;font-weight:700;color:#f59e0b">11</div>
+            <div style="font-size:11px;color:#8b8fa3;margin-top:4px">Lehrstellen</div>
+            <div style="font-size:10px;color:#6b7084">9%</div>
+          </div>
+          <div style="flex:1;min-width:120px;background:#1e2235;padding:12px;border-radius:8px;text-align:center">
+            <div style="font-size:28px;font-weight:700;color:#a78bfa">6</div>
+            <div style="font-size:11px;color:#8b8fa3;margin-top:4px">Geschaeftsltg.</div>
+            <div style="font-size:10px;color:#6b7084">5%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIMENSION 3: STANDORTE -->
+  <div class="section">
+    <div class="section-title"><div class="dot orange"></div> Dimension 3: Standort-Seiten (wo lohnt es sich?)</div>
+
+    <div class="two-col">
+      <div class="card">
+        <h2>MPA-Standortseiten (empfohlen ab 100+ SV)</h2>
+        <table>
+          <tr><th>Standort</th><th>SV/Mt</th><th>Keyword</th><th>Jobs vor Ort</th><th>Empfehlung</th></tr>
+          <tr><td><strong>Luzern</strong></td><td><span class="sv high">480</span></td><td>mpa stellen luzern</td><td>2</td><td><span class="tag green">Erstellen</span></td></tr>
+          <tr><td><strong>Zuerich</strong></td><td><span class="sv high">390</span></td><td>mpa stellen zuerich</td><td>4</td><td><span class="tag green">Erstellen</span></td></tr>
+          <tr><td><strong>Basel</strong></td><td><span class="sv mid">320</span></td><td>mpa stellen basel</td><td>3</td><td><span class="tag green">Erstellen</span></td></tr>
+          <tr><td><strong>Bern</strong></td><td><span class="sv mid">200</span></td><td>mpa stellen bern</td><td>2</td><td><span class="tag green">Erstellen</span></td></tr>
+          <tr><td><strong>Aargau</strong></td><td><span class="sv low">100</span></td><td>mpa stellen aargau</td><td>2</td><td><span class="tag green">Erstellen</span></td></tr>
+          <tr><td>Schaffhausen</td><td><span class="sv low">80</span></td><td>mpa stellen schaffhausen</td><td>3</td><td><span class="tag orange">Optional</span></td></tr>
+          <tr><td>Solothurn</td><td><span class="sv none">60</span></td><td>mpa stellen solothurn</td><td>0</td><td><span class="tag red">Nein</span></td></tr>
+          <tr><td>St. Gallen</td><td><span class="sv none">50</span></td><td>mpa stellen st gallen</td><td>2</td><td><span class="tag orange">Optional</span></td></tr>
+          <tr><td>Thurgau</td><td><span class="sv none">40</span></td><td>mpa stellen thurgau</td><td>3</td><td><span class="tag orange">Optional</span></td></tr>
+          <tr><td>Winterthur</td><td><span class="sv none">30</span></td><td>mpa stellen winterthur</td><td>3</td><td><span class="tag red">Nein</span></td></tr>
+        </table>
+        <div class="note">
+          <strong>5 Standortseiten empfohlen</strong> (Luzern, Zuerich, Basel, Bern, Aargau) = 1'490 SV/Mt<br>
+          &bull; Luzern ueberraschend staerkster MPA-Standort (480 SV &gt; Zuerich 390)
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Weitere Berufsfelder: Standort-Potenzial</h2>
+        <table>
+          <tr><th>Berufsfeld + Standort</th><th>SV/Mt</th><th>Standortseite?</th></tr>
+          <tr><td colspan="3" style="color:#4f8ff7;font-weight:600;border-bottom:1px solid #2d3348">Praxisstellen (Querschnitt)</td></tr>
+          <tr><td>praxisstellen (generisch)</td><td><span class="sv high">2'100</span></td><td><span class="tag green">Hub-Seite</span></td></tr>
+          <tr><td>praxisstellen luzern</td><td><span class="sv high">590</span></td><td><span class="tag green">Erstellen</span></td></tr>
+          <tr><td colspan="3" style="color:#4f8ff7;font-weight:600;border-bottom:1px solid #2d3348">Dentalassistentin</td></tr>
+          <tr><td>dentalassistentin stellen (generisch)</td><td><span class="sv mid">500</span></td><td><span class="tag green">Hub-Seite</span></td></tr>
+          <tr><td>dentalassistentin stellen basel</td><td><span class="sv none">40</span></td><td><span class="tag red">Nein</span></td></tr>
+          <tr><td>dentalassistentin stellen zuerich</td><td><span class="sv none">30</span></td><td><span class="tag red">Nein</span></td></tr>
+          <tr><td colspan="3" style="color:#4f8ff7;font-weight:600;border-bottom:1px solid #2d3348">Physiotherapie</td></tr>
+          <tr><td>physiotherapeut jobs (generisch)</td><td><span class="sv mid">390</span></td><td><span class="tag green">Hub-Seite</span></td></tr>
+          <tr><td>physio stellen stadt</td><td><span class="sv none">&lt;20</span></td><td><span class="tag red">Nein</span></td></tr>
+          <tr><td colspan="3" style="color:#4f8ff7;font-weight:600;border-bottom:1px solid #2d3348">Aerzte</td></tr>
+          <tr><td>assistenzarzt stellen (generisch)</td><td><span class="sv mid">260</span></td><td><span class="tag green">Hub-Seite</span></td></tr>
+          <tr><td>arzt job zuerich</td><td><span class="sv none">50</span></td><td><span class="tag red">Nein</span></td></tr>
+          <tr><td colspan="3" style="color:#4f8ff7;font-weight:600;border-bottom:1px solid #2d3348">Apotheker</td></tr>
+          <tr><td>apothekerin job (generisch)</td><td><span class="sv low">210</span></td><td><span class="tag green">Hub-Seite</span></td></tr>
+          <tr><td>apotheker stellen stadt</td><td><span class="sv none">&lt;10</span></td><td><span class="tag red">Nein</span></td></tr>
+        </table>
+        <div class="note">
+          <strong>Fazit:</strong> Nur MPA hat genug SV fuer Stadt-Landing-Pages. Alle anderen Berufsfelder nur als Hub-Seiten (generisch) ohne Stadt-Unterseiten. Ausnahme: "praxisstellen luzern" (590 SV) als eigene Seite.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMPLOYER BRANDING CONTENT -->
+  <div class="section">
+    <div class="section-title"><div class="dot purple"></div> Dimension 4: Employer Branding Content (Lohn, Ausbildung, Karriere)</div>
+
+    <div class="two-col">
+      <div class="card">
+        <h2>URL-Struktur /karriere/ (Content-Seiten)</h2>
+        <div class="tree">
+<span class="folder">/karriere/</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/lohn/</span> <span class="sv-tag">2'970+ SV</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/mpa/</span> <span class="sv-tag">950 SV</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/dentalassistentin/</span> <span class="sv-tag">650 SV</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/fage/</span> <span class="sv-tag">750 SV</span> <span class="hot">HOT</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"fage lohn" 550 + "fachfrau gesundheit lohn" 200</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"mpa lohn" 400 + "mpa lohn schweiz" 300 + "med. praxisassistentin lohn" 250</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/pharma-assistentin/</span> <span class="sv-tag">200 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/zahnarzt/</span> <span class="sv-tag">150 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/physiotherapeut/</span> <span class="sv-tag">100 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/apotheker/</span> <span class="sv-tag">80 SV</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/ausbildung/</span> <span class="sv-tag">3'750+ SV</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/physiotherapeut/</span> <span class="sv-tag">1'000 SV</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/fage/</span> <span class="sv-tag">950 SV</span> <span class="hot">HOT</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/mpa/</span> <span class="sv-tag">110 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/medizinische-fachangestellte/</span> <span class="sv-tag">110 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/arzthelferin/</span> <span class="sv-tag">110 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/sportphysiotherapeut/</span> <span class="sv-tag">70 SV</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/weiterbildung/</span> <span class="sv-tag">730+ SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/fph-offizin/</span> <span class="sv-tag">400 SV</span> <span class="hot">HOT</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"FPH Offizin by Medbase" &ndash; Medbase-eigenes Programm!</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/physiotherapeut/</span> <span class="sv-tag">140 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/fage/</span> <span class="sv-tag">100 SV</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/mpa/</span> <span class="sv-tag">90 SV</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/berufsbilder/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/fage/</span> <span class="sv-tag">1'150 SV</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/mpa/</span> <span class="comment">"gesundheits berufe" 210 + "berufe gesundheitswesen" 110</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/physiotherapeut/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/apotheker/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/zahnarzt/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="page">/arztsekretaerin/</span><br>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Employer Branding Funnel</h2>
+        <div style="padding:8px 0">
+          <!-- Top of Funnel -->
+          <div style="background:linear-gradient(135deg,#1e3b2a,#1a2d27);border:1px solid #2d5a3e;border-radius:8px;padding:16px;margin-bottom:8px">
+            <div style="font-size:11px;color:#34d399;font-weight:600;text-transform:uppercase;margin-bottom:8px">Top of Funnel &mdash; Informational</div>
+            <div style="font-size:13px;color:#c9cdd8"><strong>Lohn-Guides</strong> (2'970 SV) + <strong>Ausbildungs-Guides</strong> (3'750 SV)</div>
+            <div style="font-size:11px;color:#8b8fa3;margin-top:4px">"Was verdient eine MPA?" / "FaGe Ausbildung" / "Wie werde ich Physiotherapeut?"</div>
+            <div style="font-size:24px;font-weight:700;color:#34d399;margin-top:8px">6'720 SV/Mt</div>
+          </div>
+          <!-- Middle of Funnel -->
+          <div style="background:linear-gradient(135deg,#1e293b,#1a1d2e);border:1px solid #2d4a6e;border-radius:8px;padding:16px;margin-bottom:8px">
+            <div style="font-size:11px;color:#60a5fa;font-weight:600;text-transform:uppercase;margin-bottom:8px">Middle of Funnel &mdash; Orientierung</div>
+            <div style="font-size:13px;color:#c9cdd8"><strong>Quereinsteiger</strong> (420 SV) + <strong>Weiterbildung</strong> (330 SV) + <strong>Praktikum</strong> (160 SV)</div>
+            <div style="font-size:11px;color:#8b8fa3;margin-top:4px">"Quereinstieg MPA" / "FaGe Weiterbildung" / "MPA Praktikum"</div>
+            <div style="font-size:24px;font-weight:700;color:#60a5fa;margin-top:8px">910 SV/Mt</div>
+          </div>
+          <!-- Bottom of Funnel -->
+          <div style="background:linear-gradient(135deg,#3b2f1e,#2d2517);border:1px solid #5a4a2e;border-radius:8px;padding:16px;margin-bottom:8px">
+            <div style="font-size:11px;color:#f59e0b;font-weight:600;text-transform:uppercase;margin-bottom:8px">Bottom of Funnel &mdash; Bewerbung</div>
+            <div style="font-size:13px;color:#c9cdd8"><strong>Stellen/Jobs</strong> (FaGe 1'200 + MPA 3'500 + Physio 2'400 + Aerzte 1'200 + ...)</div>
+            <div style="font-size:11px;color:#8b8fa3;margin-top:4px">"FaGe Stellen" / "MPA Stellen Zuerich" / "Physiotherapeut Jobs"</div>
+            <div style="font-size:24px;font-weight:700;color:#f59e0b;margin-top:8px">~10'700 SV/Mt</div>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Strategie:</strong><br>
+          &bull; <strong>Lohn-Guides</strong> sind der groesste Hebel fuer Top-of-Funnel Traffic<br>
+          &bull; <strong>Quereinsteiger-Seiten</strong> positionieren Medbase als attraktiven Arbeitgeber<br>
+          &bull; Jede Content-Seite verlinkt auf passende offene Stellen (CTA)<br>
+          &bull; Funnel-Logik: Lohn lesen &rarr; Berufsbild entdecken &rarr; Stelle bewerben
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIMENSION 4b: INTERCEPTOR CONTENT -->
+  <div class="section">
+    <div class="section-title"><div class="dot red"></div> Dimension 4b: Interceptor-Content (Bewerber auf Umwegen abfangen)</div>
+
+    <div class="two-col">
+      <div class="card highlight-green">
+        <h2>Lohnrechner Gesundheitsberufe</h2>
+        <table>
+          <tr><th>Keyword</th><th>SV/Mt</th><th>Intent</th><th>Strategie</th></tr>
+          <tr style="background:#1e2235">
+            <td><strong>lohnrechner schweiz</strong></td>
+            <td><span class="sv high">9'400</span></td>
+            <td><span class="tag purple">Do 100</span></td>
+            <td rowspan="4" style="vertical-align:middle;color:#34d399;font-weight:600">
+              /karriere/lohnrechner/<br><br>
+              <span style="font-weight:400;color:#8b8fa3;font-size:11px">Nische: Lohnrechner speziell fuer Gesundheitsberufe (MPA, FaGe, Physio, DA, Apotheker). Wettbewerb bei generischem KW hoch (lohnrechner.ch, BFS Salarium, jobs.ch), aber <strong style="color:#34d399">kein Ergebnis</strong> fokussiert auf GW-Loehne!</span>
+            </td>
+          </tr>
+          <tr style="background:#1e2235">
+            <td><strong>lohnrechner</strong></td>
+            <td><span class="sv high">6'450</span></td>
+            <td><span class="tag blue">Web 100</span></td>
+          </tr>
+          <tr>
+            <td>lohnvergleich schweiz</td>
+            <td><span class="sv mid">1'050</span></td>
+            <td><span class="tag purple">Do 20</span></td>
+          </tr>
+          <tr>
+            <td>nettolohnrechner schweiz</td>
+            <td><span class="sv mid">650</span></td>
+            <td>&mdash;</td>
+          </tr>
+          <tr style="background:#064e3b">
+            <td colspan="2" style="color:#34d399;font-weight:700;font-size:15px">Total Cluster: ~17'550 SV/Mt</td>
+            <td colspan="2" style="color:#34d399;font-weight:600">Groesster Einzelhebel der gesamten Analyse!</td>
+          </tr>
+        </table>
+        <div class="note" style="border-color:#34d399">
+          <strong style="color:#34d399">Warum das funktioniert:</strong><br>
+          &bull; Wer "Lohnrechner" sucht, denkt ueber Gehalt nach &rarr; <strong>potentiell wechselwillig</strong><br>
+          &bull; Tool bindet Nutzer (Verweildauer, Interaktion) &rarr; <strong>bessere SEO-Signale</strong><br>
+          &bull; "WE PAY FAIR" Label perfekt integrierbar &rarr; <strong>Employer Branding</strong><br>
+          &bull; Jedes Ergebnis zeigt: "Bei Medbase verdienst du X" + CTA auf offene Stellen<br>
+          &bull; Links von Lohn-Guide-Seiten (2'970 SV) &rarr; <strong>interne Verlinkung</strong><br><br>
+          <strong style="color:#f59e0b">Aufwand:</strong> Hoch (interaktives Tool, Gehaltsdaten pflegen). Aber: groesster ROI der ganzen Analyse.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Weitere Interceptor-Themen</h2>
+        <table>
+          <tr><th>Thema</th><th>SV/Mt</th><th>Intent</th><th>Fit</th><th>Umsetzbar?</th></tr>
+          <tr><td colspan="5" style="color:#34d399;font-weight:600;border-bottom:1px solid #2d3348">Hohe Relevanz</td></tr>
+          <tr>
+            <td><strong>Schnupperlehre</strong></td>
+            <td><span class="sv mid">1'250</span></td>
+            <td><span class="tag green">Know 50</span> <span class="tag purple">Do 43</span></td>
+            <td><span class="tag green">Perfekt</span></td>
+            <td style="color:#34d399">423 Lernende!</td>
+          </tr>
+          <tr>
+            <td><strong>Gesundheitsberufe</strong></td>
+            <td><span class="sv low">100</span></td>
+            <td><span class="tag purple">Do 100</span> <span class="tag orange">Visit 80</span></td>
+            <td><span class="tag green">Perfekt</span></td>
+            <td style="color:#34d399">= /berufsfelder/</td>
+          </tr>
+          <tr>
+            <td><strong>Medizinische Berufe</strong></td>
+            <td><span class="sv low">80</span></td>
+            <td><span class="tag green">Know 90</span></td>
+            <td><span class="tag green">Gut</span></td>
+            <td style="color:#34d399">= /berufsfelder/</td>
+          </tr>
+
+          <tr><td colspan="5" style="color:#f59e0b;font-weight:600;border-bottom:1px solid #2d3348">Generisch aber mit GW-Nische moeglich</td></tr>
+          <tr>
+            <td><strong>Bewerbungsschreiben</strong></td>
+            <td><span class="sv high">5'350</span></td>
+            <td><span class="tag green">Know 100</span> <span class="tag purple">Do 54</span></td>
+            <td><span class="tag orange">Generisch</span></td>
+            <td style="color:#f59e0b">GW-Nische: "Bewerbung als MPA"</td>
+          </tr>
+          <tr>
+            <td><strong>Arbeitszeugnis</strong></td>
+            <td><span class="sv high">2'350</span></td>
+            <td><span class="tag green">Know 90</span> <span class="tag purple">Do 50</span></td>
+            <td><span class="tag orange">Generisch</span></td>
+            <td style="color:#f59e0b">GW-Nische moeglich</td>
+          </tr>
+          <tr>
+            <td><strong>Work-Life-Balance</strong></td>
+            <td><span class="sv mid">1'200</span></td>
+            <td>&mdash;</td>
+            <td><span class="tag blue">EB-Content</span></td>
+            <td style="color:#f59e0b">"WLB bei Medbase" Ratgeber</td>
+          </tr>
+
+          <tr><td colspan="5" style="color:#ef4444;font-weight:600;border-bottom:1px solid #2d3348">Zu generisch / nicht realistisch</td></tr>
+          <tr>
+            <td>Lebenslauf Vorlage</td>
+            <td><span class="sv high">10'000</span></td>
+            <td>&mdash;</td>
+            <td><span class="tag red">Zu generisch</span></td>
+            <td style="color:#ef4444">Keine GW-Nische</td>
+          </tr>
+          <tr>
+            <td>Burnout</td>
+            <td><span class="sv high">3'600</span></td>
+            <td><span class="tag green">Know 100</span></td>
+            <td><span class="tag red">Medizinisch</span></td>
+            <td style="color:#ef4444">Gehoert auf medbase.ch</td>
+          </tr>
+          <tr>
+            <td>Berufswahl</td>
+            <td><span class="sv high">2'750</span></td>
+            <td><span class="tag blue">Web 100</span></td>
+            <td><span class="tag red">Zu generisch</span></td>
+            <td style="color:#ef4444">berufsberatung.ch dominiert</td>
+          </tr>
+        </table>
+
+        <div class="note">
+          <strong>Interceptor-Logik:</strong><br>
+          &bull; <strong style="color:#34d399">Lohnrechner</strong>: "Verdiene ich genug?" &rarr; Medbase zeigt faire Loehne &rarr; Bewerbung<br>
+          &bull; <strong style="color:#34d399">Schnupperlehre</strong>: Schueler sucht Einblick &rarr; Medbase bietet Schnuppertage &rarr; Lehrstelle<br>
+          &bull; <strong style="color:#f59e0b">Bewerbungsschreiben</strong>: Aktiv suchend &rarr; "Bewerbung als MPA" Guide &rarr; "Gleich bei uns bewerben!"<br>
+          &bull; <strong style="color:#f59e0b">Arbeitszeugnis</strong>: Wechselwillig &rarr; "Nächster Schritt: Medbase" CTA<br>
+          &bull; <strong style="color:#f59e0b">Work-Life-Balance</strong>: Unzufrieden &rarr; "55% Teilzeit bei Medbase" &rarr; Bewerbung
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GESAMTSTRUKTUR -->
+  <div class="section">
+    <div class="section-title"><div class="dot red"></div> Gesamtstruktur: Alles zusammen</div>
+
+    <div class="card highlight">
+      <h2>Vollstaendige URL-Architektur /karriere/</h2>
+      <div class="three-col">
+        <div>
+          <div class="tree">
+<span class="folder" style="font-size:15px">/karriere/</span><br>
+<br>
+<span style="color:#4f8ff7;font-weight:700">BERUFSFELDER</span><br>
+&nbsp;&nbsp;<span class="folder">/berufsfelder/</span> <span class="comment">Uebersicht</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/aerzte/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/allgemeine-innere-medizin/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/dermatologie/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/gynaekologie/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/kardiologie/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/rheumatologie/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ophthalmologie/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/paediatrie/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/assistenzarzt/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/mpa/</span> <span class="hot">TOP</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/zuerich/ /luzern/ /basel/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/bern/ /aargau/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/physiotherapie/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/sportphysiotherapie/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/fage/</span> <span class="hot">HOT</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/apotheker/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/pharma-assistenz/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/zahnmedizin/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/zahnarzt/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/dentalassistentin/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/dentalhygienikerin/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/arztsekretaerin/</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/sachbearbeiter/</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/qualitaetsmanagement/</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">/apn/</span> <span class="new">NEU</span><br>
+          </div>
+        </div>
+        <div>
+          <div class="tree">
+<span style="color:#34d399;font-weight:700">KARRIERESTUFEN</span><br>
+&nbsp;&nbsp;<span class="folder">/lehrstellen/</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;/mpa/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/pharma-assistenz/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/dentalassistentin/<br>
+&nbsp;&nbsp;<span class="folder">/quereinsteiger/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;/mpa/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/physiotherapie/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/gesundheitswesen/<br>
+&nbsp;&nbsp;<span class="folder">/praktikum/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;/mpa/<br>
+&nbsp;&nbsp;<span class="folder">/teamleitung/</span><br>
+&nbsp;&nbsp;<span class="folder">/geschaeftsleitung/</span><br>
+<br>
+<span style="color:#f59e0b;font-weight:700">STANDORTE (Querschnitt)</span><br>
+&nbsp;&nbsp;<span class="folder">/praxisstellen/</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;/luzern/<br>
+&nbsp;&nbsp;<span class="folder">/stellen/</span> <span class="comment">Jobsuche + Filter</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">Dynamisch aus Workday API</span><br>
+          </div>
+        </div>
+        <div>
+          <div class="tree">
+<span style="color:#a78bfa;font-weight:700">EMPLOYER BRANDING CONTENT</span><br>
+&nbsp;&nbsp;<span class="folder">/lohnrechner/</span> <span class="hot">HOT</span> <span class="new">17'550 SV!</span><br>
+&nbsp;&nbsp;<span class="folder">/schnupperlehre/</span> <span class="new">NEU</span><br>
+&nbsp;&nbsp;<span class="folder">/lohn/</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;/mpa/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/fage/ <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;/dentalassistentin/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/pharma-assistentin/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/zahnarzt/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/physiotherapeut/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/apotheker/<br>
+&nbsp;&nbsp;<span class="folder">/ausbildung/</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;/physiotherapeut/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/fage/ <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;/mpa/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/medizinische-fachangestellte/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/arzthelferin/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/sportphysiotherapeut/<br>
+&nbsp;&nbsp;<span class="folder">/weiterbildung/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;/fph-offizin/ <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;/physiotherapeut/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/fage/ <span class="new">NEU</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;/mpa/<br>
+&nbsp;&nbsp;<span class="folder">/berufsbilder/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;/mpa/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/physiotherapeut/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/apotheker/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/zahnarzt/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/arztsekretaerin/<br>
+<br>
+<span style="color:#ef4444;font-weight:700">CORPORATE / UEBER-UNS</span><br>
+<span class="folder">/ueber-medbase/</span><br>
+&nbsp;&nbsp;/gruppe/<br>
+&nbsp;&nbsp;/marken/<br>
+&nbsp;&nbsp;/geschaeftsleitung/<br>
+&nbsp;&nbsp;/integrierte-versorgung/<br>
+&nbsp;&nbsp;/managed-care/<br>
+&nbsp;&nbsp;/equal-pay/<br>
+&nbsp;&nbsp;/jahresbericht/<br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEITENANZAHL & PRIORISIERUNG -->
+  <div class="section">
+    <div class="section-title"><div class="dot blue"></div> Seitenanzahl &amp; Priorisierung</div>
+
+    <div class="grid grid-3">
+      <div class="card highlight-green">
+        <h2>Phase 1: Quick Wins (Prio A)</h2>
+        <table>
+          <tr><th>Seitentyp</th><th>Anzahl</th><th>SV-Potenzial</th></tr>
+          <tr><td>Berufsfelder-Hub</td><td>1</td><td>&mdash;</td></tr>
+          <tr><td>MPA Hub + 5 Staedte</td><td>6</td><td>2'490</td></tr>
+          <tr><td>Lohn-Guides (7 Berufe, inkl. FaGe)</td><td>8</td><td>2'970</td></tr>
+          <tr><td>Lehrstellen-Hub + 3 Berufe</td><td>4</td><td>1'080</td></tr>
+          <tr><td>Praxisstellen Hub + Luzern</td><td>2</td><td>2'690</td></tr>
+          <tr style="background:#1e2235"><td><strong>Lohnrechner GW</strong> <span class="new">NEU</span></td><td>1</td><td style="color:#34d399;font-weight:700">17'550!</td></tr>
+          <tr style="background:#1e2235"><td><strong>Schnupperlehre</strong> <span class="new">NEU</span></td><td>1</td><td>1'250</td></tr>
+          <tr style="background:#1e2235"><td>Medbase Gruppe + Marken</td><td>2</td><td>&mdash;</td></tr>
+          <tr style="background:#1e2235"><td>FPH Offizin (Weiterbildung)</td><td>1</td><td>400</td></tr>
+          <tr><td style="font-weight:700;color:#34d399">Total Phase 1</td><td style="font-weight:700;color:#34d399">26</td><td style="font-weight:700;color:#34d399">~30'430</td></tr>
+        </table>
+      </div>
+
+      <div class="card highlight">
+        <h2>Phase 2: Ausbau (Prio B)</h2>
+        <table>
+          <tr><th>Seitentyp</th><th>Anzahl</th><th>SV-Potenzial</th></tr>
+          <tr><td>Aerzte Hub + 7 Fachgebiete + Assistenzarzt</td><td>9</td><td>1'460</td></tr>
+          <tr><td>Physiotherapie Hub + Sport</td><td>2</td><td>460</td></tr>
+          <tr><td>FaGe Hub (Stellen + Berufsbild)</td><td>2</td><td>1'900</td></tr>
+          <tr><td>Ausbildung Hub + 6 Berufe (inkl. FaGe)</td><td>7</td><td>3'750</td></tr>
+          <tr><td>Quereinsteiger Hub + 3 Berufe</td><td>4</td><td>420</td></tr>
+          <tr><td>Apotheker + Pharma-Assistenz</td><td>2</td><td>270</td></tr>
+          <tr><td>Zahnmedizin Hub + 3 Berufe</td><td>4</td><td>980</td></tr>
+          <tr><td style="font-weight:700;color:#4f8ff7">Total Phase 2</td><td style="font-weight:700;color:#4f8ff7">30</td><td style="font-weight:700;color:#4f8ff7">~9'240</td></tr>
+        </table>
+      </div>
+
+      <div class="card highlight-orange">
+        <h2>Phase 3: Long Tail (Prio C)</h2>
+        <table>
+          <tr><th>Seitentyp</th><th>Anzahl</th><th>SV-Potenzial</th></tr>
+          <tr><td>Arztsekretaerin</td><td>1</td><td>360</td></tr>
+          <tr><td>Sachbearbeiter GW</td><td>1</td><td>350</td></tr>
+          <tr><td>QM Gesundheitswesen</td><td>1</td><td>110</td></tr>
+          <tr><td>Weiterbildung Hub + 3 Berufe (inkl. FaGe)</td><td>4</td><td>330</td></tr>
+          <tr><td>Praktikum MPA</td><td>1</td><td>160</td></tr>
+          <tr><td>Berufsbilder (5 Seiten)</td><td>5</td><td>320</td></tr>
+          <tr><td>Teamleitung / GL Hubs</td><td>2</td><td>&mdash;</td></tr>
+          <tr><td style="font-weight:700;color:#f59e0b">Total Phase 3</td><td style="font-weight:700;color:#f59e0b">15</td><td style="font-weight:700;color:#f59e0b">~1'630</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-size:18px;font-weight:700;color:#fff">Gesamt: ~79 Seiten</div>
+          <div style="font-size:13px;color:#8b8fa3;margin-top:4px">26 Phase 1 &bull; 33 Phase 2 &bull; 20 Phase 3 &nbsp;(inkl. Lohnrechner, Interceptors, Corporate)</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:18px;font-weight:700;color:#34d399">~38'500 SV/Mt Potenzial</div>
+          <div style="font-size:13px;color:#8b8fa3;margin-top:4px">Davon ~17'550 allein Lohnrechner | Realistisch ~5'000-10'000 Klicks/Mt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIMENSION 5: CORPORATE / ALLGEMEINE SEITEN -->
+  <div class="section">
+    <div class="section-title"><div class="dot red"></div> Dimension 5: Corporate &amp; Allgemeine Seiten (aus Jahresbericht 2024)</div>
+
+    <div class="two-col">
+      <div class="card">
+        <h2>Themen mit Suchvolumen (Jahresbericht-Analyse)</h2>
+        <table>
+          <tr><th>Thema</th><th>SV/Mt</th><th>Jahresbericht-Bezug</th><th>Seite?</th></tr>
+          <tr><td colspan="4" style="color:#34d399;font-weight:600;border-bottom:1px solid #2d3348">Hohe Relevanz (Employer Branding + SV)</td></tr>
+          <tr>
+            <td><strong>FPH Offizin</strong></td>
+            <td><span class="sv high">400</span></td>
+            <td>"FPH Offizin by Medbase" Weiterbildungsprogramm, 39 Teilnehmende</td>
+            <td><span class="tag green">Erstellen</span></td>
+          </tr>
+          <tr>
+            <td><strong>Advanced Practice Nurse</strong></td>
+            <td><span class="sv low">100</span></td>
+            <td>Nurse Practitioners in Medical Centern, neues Berufsbild</td>
+            <td><span class="tag green">Erstellen</span></td>
+          </tr>
+          <tr>
+            <td><strong>Managed Care</strong></td>
+            <td><span class="sv low">100</span></td>
+            <td>260'000 AVM-Versicherte, CHF 200 Mio. Praemieneinsparung</td>
+            <td><span class="tag green">Erstellen</span></td>
+          </tr>
+          <tr>
+            <td><strong>Nurse Practitioner Schweiz</strong></td>
+            <td><span class="sv low">80</span></td>
+            <td>CNS + NP Rollen bei Medbase, Chronic Care</td>
+            <td><span class="tag blue">Mit APN</span></td>
+          </tr>
+          <tr><td colspan="4" style="color:#60a5fa;font-weight:600;border-bottom:1px solid #2d3348">Mittlere Relevanz (Thought Leadership)</td></tr>
+          <tr>
+            <td><strong>Integrierte Versorgung</strong></td>
+            <td><span class="sv none">50</span></td>
+            <td>Kernstrategie Medbase, Zielbild im Jahresbericht</td>
+            <td><span class="tag orange">Know 100</span></td>
+          </tr>
+          <tr>
+            <td><strong>Gendermedizin</strong></td>
+            <td><span class="sv none">50</span></td>
+            <td>Gendermedizintag mit ETH Zuerich</td>
+            <td><span class="tag red">Know 100</span></td>
+          </tr>
+          <tr>
+            <td><strong>Interprofessionelle Zusammenarbeit</strong></td>
+            <td><span class="sv none">50</span></td>
+            <td>Kernwert Medbase, Triage &amp; Ueberweisung Projekt</td>
+            <td><span class="tag orange">Know 100</span></td>
+          </tr>
+          <tr>
+            <td><strong>Equal Pay / Lohngleichheit</strong></td>
+            <td><span class="sv none">50+20</span></td>
+            <td>"WE PAY FAIR" Label Uni St. Gallen</td>
+            <td><span class="tag red">Know 100</span></td>
+          </tr>
+          <tr>
+            <td><strong>Gesundheitskosten Schweiz</strong></td>
+            <td><span class="sv none">50</span></td>
+            <td>CHF 200 Mio. Einsparungen durch Managed Care</td>
+            <td><span class="tag red">Know 100</span></td>
+          </tr>
+          <tr><td colspan="4" style="color:#f59e0b;font-weight:600;border-bottom:1px solid #2d3348">Niedrige Relevanz (kein eigenes SV)</td></tr>
+          <tr>
+            <td>Telemedizin Schweiz</td>
+            <td><span class="sv none">30</span></td>
+            <td>Medbase Telehealth ab 2025</td>
+            <td><span class="tag red">Nein</span></td>
+          </tr>
+          <tr>
+            <td>Digitalisierung GW</td>
+            <td><span class="sv none">20</span></td>
+            <td>Compassana, Zur Rose Studio</td>
+            <td><span class="tag red">Nein</span></td>
+          </tr>
+          <tr>
+            <td>Aerztemangel Schweiz</td>
+            <td><span class="sv none">20</span></td>
+            <td>5500 fehlende Aerzte in 15 Jahren</td>
+            <td><span class="tag red">Nein</span></td>
+          </tr>
+          <tr>
+            <td>Nachhaltigkeit GW</td>
+            <td><span class="sv none">10</span></td>
+            <td>Nicht explizit im Jahresbericht</td>
+            <td><span class="tag red">Nein</span></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Empfohlene Corporate-Seiten</h2>
+        <div class="tree">
+<span class="folder" style="font-size:15px">/ueber-medbase/</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/gruppe/</span> <span class="comment">Medbase Gruppe Uebersicht</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">4'340 MA, 188 Standorte, CHF 1.3 Mia., Migros Gruppe</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/marken/</span> <span class="comment">Markenportfolio</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">Medbase, Apotheken, zahnarztzentrum.ch, Zur Rose, BlueCare, WePractice</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/geschaeftsleitung/</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/integrierte-versorgung/</span> <span class="sv-tag">50 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">Zielbild, Behandlungspfad, interprofessionelle Zusammenarbeit</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/managed-care/</span> <span class="sv-tag">100 SV</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">260'000 AVM-Versicherte, Kostendaempfung</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/equal-pay/</span> <span class="comment">Intent: Know 100 &ndash; eher Brand-Seite</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"WE PAY FAIR" Label &ndash; besser als Abschnitt auf Karriere-Startseite</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/jahresbericht/</span><br>
+<br>
+<span class="folder" style="font-size:15px">/karriere/</span> <span class="comment">(Ergaenzungen zu bestehendem)</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/fph-offizin/</span> <span class="sv-tag">400 SV</span> <span class="hot">HOT</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"FPH Offizin by Medbase" Weiterbildungsprogramm</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">Eigene LP unter /karriere/weiterbildung/fph-offizin/</span><br>
+<br>
+&nbsp;&nbsp;<span class="folder">/advanced-practice-nurse/</span> <span class="sv-tag">180 SV</span> <span class="lp">LP</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"advanced practice nurse" 100 + "nurse practitioner schweiz" 80</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">Eigene LP unter /karriere/berufsfelder/apn/</span><br>
+        </div>
+
+        <div class="note" style="margin-top:16px">
+          <strong>Key Facts fuer Corporate-Seiten (Jahresbericht 2024):</strong><br>
+          &bull; <strong>4'340 Mitarbeitende</strong> (77% Frauen, 55% Teilzeit)<br>
+          &bull; <strong>188 Standorte</strong> (54 MC, 12 Sports MC, 55 Apotheken, 42 ZAZ, 16 WePractice)<br>
+          &bull; <strong>CHF 1.3 Mia. Umsatz</strong> (+26% ggue. Vorjahr)<br>
+          &bull; <strong>423 Lernende</strong> (111 MPA, 196 DA, 102 Fachperson Apotheke)<br>
+          &bull; <strong>>90% Lehrabschlussquote</strong>, 2/3 bleiben nach Lehre<br>
+          &bull; <strong>"WE PAY FAIR"</strong> Label der Uni St. Gallen<br>
+          &bull; <strong>260'000 Managed-Care-Versicherte</strong><br>
+          &bull; <strong>CHF 200 Mio.</strong> Praemieneinsparungen durch AVM<br>
+          &bull; <strong>MedMagnet:</strong> 70 Einstellungen durch Mitarbeiter-Empfehlungen<br>
+          &bull; <strong>Teil der Migros Gruppe</strong>
+        </div>
+
+        <h4 style="margin-top:20px">Zusaetzliche Seiten: +8 Corporate-Seiten</h4>
+        <table>
+          <tr><th>Seite</th><th>SV</th><th>Phase</th></tr>
+          <tr><td>FPH Offizin (Weiterbildung)</td><td><span class="sv high">400</span></td><td><span class="tag green">Phase 1</span></td></tr>
+          <tr><td>Advanced Practice Nurse / NP</td><td><span class="sv low">180</span></td><td><span class="tag blue">Phase 2</span></td></tr>
+          <tr><td>Managed Care</td><td><span class="sv low">100</span></td><td><span class="tag blue">Phase 2</span></td></tr>
+          <tr><td>Equal Pay / Lohngleichheit</td><td><span class="sv none">70</span></td><td><span class="tag orange">Know-Intent!</span></td></tr>
+          <tr><td>Medbase Gruppe (Uebersicht)</td><td>&mdash;</td><td><span class="tag green">Phase 1</span></td></tr>
+          <tr><td>Markenportfolio</td><td>&mdash;</td><td><span class="tag green">Phase 1</span></td></tr>
+          <tr><td>Integrierte Versorgung</td><td><span class="sv none">50</span></td><td><span class="tag orange">Phase 3</span></td></tr>
+          <tr><td>Jahresbericht</td><td>&mdash;</td><td><span class="tag orange">Phase 3</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH INTENT CHECK -->
+  <div class="section">
+    <div class="section-title"><div class="dot green"></div> Search Intent Check: Passt die Suchintention zu Recruiting / Employer Branding?</div>
+
+    <div class="two-col">
+      <div class="card highlight-green">
+        <h2>Karriere-Keywords: Intent passt</h2>
+        <table>
+          <tr><th>Keyword (Beispiel)</th><th>SV</th><th>Intent</th><th>Fit</th></tr>
+          <tr><td colspan="4" style="color:#34d399;font-weight:600;border-bottom:1px solid #2d3348">Stellen / Jobs (Bottom Funnel)</td></tr>
+          <tr><td>mpa stellen</td><td>1'000</td><td><span class="tag blue">Website 100</span></td><td><span class="tag green">Recruiting</span></td></tr>
+          <tr><td>mpa stellen luzern</td><td>480</td><td><span class="tag blue">Website 20</span></td><td><span class="tag green">Recruiting</span></td></tr>
+          <tr><td>fage stellen</td><td>750</td><td><span class="tag purple">Do 50</span> <span class="tag blue">Web 20</span></td><td><span class="tag green">Recruiting</span></td></tr>
+          <tr><td>physiotherapeut jobs</td><td>390</td><td><span class="tag purple">Do 50</span> <span class="tag blue">Web 20</span></td><td><span class="tag green">Recruiting</span></td></tr>
+          <tr><td>assistenzarzt stellen</td><td>260</td><td><span class="tag purple">Do 50</span> <span class="tag blue">Web 20</span></td><td><span class="tag green">Recruiting</span></td></tr>
+          <tr><td>praxisstellen</td><td>2'100</td><td><span class="tag blue">Website 100</span> <span class="tag green">Know 28</span></td><td><span class="tag green">Recruiting</span></td></tr>
+          <tr><td>dentalassistentin stellen</td><td>500</td><td><span class="tag purple">Do 20</span> <span class="tag blue">Web 20</span></td><td><span class="tag green">Recruiting</span></td></tr>
+          <tr><td>mpa praktikum</td><td>160</td><td><span class="tag purple">Do 30</span> <span class="tag blue">Web 20</span></td><td><span class="tag green">Recruiting</span></td></tr>
+
+          <tr><td colspan="4" style="color:#34d399;font-weight:600;border-bottom:1px solid #2d3348">Lohn-Guides (Top Funnel)</td></tr>
+          <tr><td>mpa lohn</td><td>950</td><td><span class="tag green">Know 90</span> <span class="tag purple">Do 50</span></td><td><span class="tag green">Employer Br.</span></td></tr>
+          <tr><td>fage lohn</td><td>550</td><td><span class="tag green">Know 90</span></td><td><span class="tag green">Employer Br.</span></td></tr>
+          <tr><td>dentalassistentin lohn</td><td>650</td><td><span class="tag green">Know 90</span></td><td><span class="tag green">Employer Br.</span></td></tr>
+          <tr><td>pharma assistentin lohn</td><td>200</td><td><span class="tag green">Know 90</span></td><td><span class="tag green">Employer Br.</span></td></tr>
+
+          <tr><td colspan="4" style="color:#34d399;font-weight:600;border-bottom:1px solid #2d3348">Ausbildung / Karriere (Top Funnel)</td></tr>
+          <tr><td>physiotherapeut ausbildung</td><td>1'000</td><td><span class="tag green">Know 100</span> <span class="tag purple">Do 27</span></td><td><span class="tag green">Employer Br.</span></td></tr>
+          <tr><td>fage ausbildung</td><td>950</td><td><span class="tag green">Know 100</span> <span class="tag purple">Do 35</span></td><td><span class="tag green">Employer Br.</span></td></tr>
+          <tr><td>fachfrau gesundheit</td><td>1'150</td><td><span class="tag green">Know 100</span> <span class="tag purple">Do 50</span></td><td><span class="tag green">Berufsbild</span></td></tr>
+
+          <tr><td colspan="4" style="color:#34d399;font-weight:600;border-bottom:1px solid #2d3348">Quereinsteiger / Weiterbildung</td></tr>
+          <tr><td>quereinsteiger mpa</td><td>110</td><td><span class="tag purple">Do 30</span></td><td><span class="tag green">Employer Br.</span></td></tr>
+          <tr><td>mpa quereinstieg</td><td>70</td><td><span class="tag purple">Do 30</span> <span class="tag blue">Web 20</span></td><td><span class="tag green">Employer Br.</span></td></tr>
+          <tr><td>sachbearbeiter GW</td><td>350</td><td><span class="tag green">Know 90</span> <span class="tag purple">Do 50</span></td><td><span class="tag green">Berufsbild+Job</span></td></tr>
+
+          <tr><td colspan="4" style="color:#34d399;font-weight:600;border-bottom:1px solid #2d3348">Spezial: Medbase-eigenes Programm</td></tr>
+          <tr><td><strong>fph offizin</strong></td><td>400</td><td><span class="tag blue">Website 100!</span></td><td><span class="tag green">Perfekt!</span></td></tr>
+        </table>
+        <div class="note">
+          <strong>Fazit Karriere:</strong> Alle Keywords passen zur Recruiting-/Employer-Branding-Intention.<br>
+          &bull; <strong>Stellen/Jobs</strong> = Do/Website-Intent (Jobsuche) &rarr; Stellenlisten<br>
+          &bull; <strong>Lohn</strong> = Know-Intent (Gehaltstransparenz) &rarr; positioniert Medbase als fairen Arbeitgeber<br>
+          &bull; <strong>Ausbildung</strong> = Know-Intent (Berufsorientierung) &rarr; Medbase als Ausbildungsbetrieb<br>
+          &bull; <strong>FPH Offizin</strong> = Website-Intent 100! &rarr; navigational zu Medbase, Top-Prioritaet
+        </div>
+      </div>
+
+      <div class="card highlight-orange">
+        <h2>Corporate-Keywords: Intent-Warnung</h2>
+        <table>
+          <tr><th>Keyword</th><th>SV</th><th>Intent</th><th>Fit</th></tr>
+          <tr><td colspan="4" style="color:#ef4444;font-weight:600;border-bottom:1px solid #2d3348">Know-dominant (Fachbegriff-Definitionen)</td></tr>
+          <tr>
+            <td>managed care</td><td>100</td>
+            <td><span class="tag green">Know 100</span> <span class="tag purple">Do 16</span></td>
+            <td><span class="tag orange">Vorsicht</span></td>
+          </tr>
+          <tr>
+            <td>advanced practice nurse</td><td>100</td>
+            <td><span class="tag green">Know 100</span> <span class="tag purple">Do 21</span></td>
+            <td><span class="tag orange">Vorsicht</span></td>
+          </tr>
+          <tr>
+            <td>equal pay</td><td>50</td>
+            <td><span class="tag green">Know 100</span> <span class="tag purple">Do 28</span></td>
+            <td><span class="tag red">Politisch</span></td>
+          </tr>
+          <tr>
+            <td>integrierte versorgung</td><td>50</td>
+            <td><span class="tag green">Know 100</span> <span class="tag purple">Do 38</span></td>
+            <td><span class="tag orange">Fachbegriff</span></td>
+          </tr>
+          <tr>
+            <td>gendermedizin</td><td>50</td>
+            <td><span class="tag green">Know 100</span> <span class="tag purple">Do 21</span></td>
+            <td><span class="tag red">Medizinisch</span></td>
+          </tr>
+          <tr>
+            <td>interprofessionelle zusammenarbeit</td><td>50</td>
+            <td><span class="tag green">Know 100</span> <span class="tag purple">Do 28</span></td>
+            <td><span class="tag orange">Fachbegriff</span></td>
+          </tr>
+          <tr>
+            <td>lohngleichheit</td><td>20</td>
+            <td><span class="tag green">Know 90</span> <span class="tag purple">Do 30</span></td>
+            <td><span class="tag red">Politisch</span></td>
+          </tr>
+          <tr>
+            <td>gesundheitskosten schweiz</td><td>50</td>
+            <td><span class="tag green">Know 100</span> <span class="tag purple">Do 50</span></td>
+            <td><span class="tag red">Politisch</span></td>
+          </tr>
+          <tr><td colspan="4" style="color:#f59e0b;font-weight:600;border-bottom:1px solid #2d3348">Bedingt passend (Know + Berufsbild)</td></tr>
+          <tr>
+            <td>nurse practitioner schweiz</td><td>80</td>
+            <td><span class="tag green">Know 90</span> <span class="tag purple">Do 30</span></td>
+            <td><span class="tag blue">Berufsbild</span></td>
+          </tr>
+        </table>
+        <div class="note" style="border-color:#f59e0b">
+          <strong style="color:#f59e0b">Problem:</strong> Fast alle Corporate-Keywords haben <strong>Know-Intent = 100</strong>.<br>
+          Suchende wollen <strong>Definitionen/Erklaerungen</strong>, nicht Arbeitgeber-Infos.<br><br>
+          <strong>Empfehlung:</strong><br>
+          &bull; <strong style="color:#ef4444">"equal pay"</strong>, <strong style="color:#ef4444">"gendermedizin"</strong>, <strong style="color:#ef4444">"gesundheitskosten"</strong> &rarr; SERP wird von Wikipedia, Zeitungen, Politik dominiert. Kaum Chance fuer Corporate-Seite.<br>
+          &bull; <strong style="color:#f59e0b">"managed care"</strong>, <strong style="color:#f59e0b">"integrierte versorgung"</strong> &rarr; Koennte als Thought-Leadership funktionieren, wenn Content wirklich informativ ist (Ratgeber-Format statt Eigenwerbung).<br>
+          &bull; <strong style="color:#34d399">"nurse practitioner schweiz"</strong> &rarr; Besser als Berufsbild unter /karriere/berufsfelder/apn/ einordnen statt als Corporate-Seite.<br>
+          &bull; <strong style="color:#34d399">"advanced practice nurse"</strong> &rarr; Ebenfalls besser als Berufsbild-Seite.<br><br>
+          <strong>Fazit:</strong> Corporate-Seiten eher fuer Brand/Navigation erstellen (Gruppe, Marken, GL, Jahresbericht), <strong>nicht</strong> auf SV-Keywords optimieren. Die SV-relevanten Themen (APN, NP) besser im Karriere-Bereich unterbringen.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HINWEISE -->
+  <div class="section">
+    <div class="section-title"><div class="dot purple"></div> Wichtige Hinweise fuer Kickoff</div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h2>Offene Fragen</h2>
+        <div style="font-size:13px;line-height:2;color:#c9cdd8">
+          1. <strong style="color:#ef4444">FaGe (Fachfrau Gesundheit):</strong> Groesstes SV-Cluster (4'600+) aber 0 Jobs. Stellt Medbase FaGe an? Oder FaGe als Zielgruppe fuer MPA-Quereinstieg nutzen?<br>
+          2. <strong style="color:#ef4444">Zahnmedizin:</strong> 0 Stellen auf Workday trotz zahnarztzentrum.ch (42 Standorte). Werden Zahnarzt-Jobs separat ausgeschrieben?<br>
+          3. <strong style="color:#f59e0b">Workday-API:</strong> Aktuell iFrame-Einbindung. API-Zugang fuer dynamische Stellenlisten noetig?<br>
+          4. <strong style="color:#60a5fa">Kannibalisierung:</strong> Karriere-Content auf Gruppensite vs. jobs.medbase.ch - klare Abgrenzung definieren<br>
+          5. <strong>Praxisstellen:</strong> "praxisstellen" hat 2'100 SV &mdash; eigene Marke/Sektion oder unter /karriere/?<br>
+          6. <strong>FR/EN:</strong> Romandie-Stellen (~20 Jobs) auch auf Franzoesisch?<br>
+          7. <strong>Kauffrau/Kaufmann GW</strong> (10 SV) + <strong>Gesundheitsokonom</strong> (10 SV) &rarr; zu wenig SV, nicht eingeplant
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Technische Anforderungen</h2>
+        <div style="font-size:13px;line-height:2;color:#c9cdd8">
+          1. <strong>JobPosting Schema</strong> auf allen Stellenseiten fuer Google for Jobs<br>
+          2. <strong>Workday-API</strong> statt iFrame fuer indexierbare Stellenlisten<br>
+          3. <strong>Dynamische Filter</strong> nach Berufsfeld, Standort, Karrierestufe<br>
+          4. <strong>Jaehrliche Aktualisierung</strong> der Lehrstellen-Seiten (2026, 2027...)<br>
+          5. <strong>Cross-Linking</strong> zwischen Lohn &rarr; Berufsbild &rarr; Stellen (Funnel)<br>
+          6. <strong>Canonical Tags</strong> bei Ueberschneidung Berufsfeld/Hierarchie<br>
+          7. <strong>hreflang</strong> fuer DE/FR Stellenseiten
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medbase.ch - Keyword & Relaunch Board</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; }
+
+  /* Header */
+  .header { display: flex; justify-content: space-between; align-items: center; padding: 20px 28px 0; }
+  .header h1 { font-size: 20px; font-weight: 700; color: #fff; }
+  .header h1 span { color: #38bdf8; }
+  .header .meta { font-size: 12px; color: #64748b; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 0; padding: 16px 28px 0; border-bottom: 1px solid #1e293b; }
+  .tab { padding: 10px 20px; font-size: 13px; font-weight: 600; color: #64748b; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; }
+  .tab:hover { color: #94a3b8; }
+  .tab.active { color: #38bdf8; border-bottom-color: #38bdf8; }
+
+  .tab-content { display: none; padding: 24px 28px; }
+  .tab-content.active { display: block; }
+
+  /* KPI Bar */
+  .kpi-bar { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 20px; }
+  .kpi { background: #1e293b; border-radius: 10px; padding: 14px 16px; border: 1px solid #334155; }
+  .kpi .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 3px; }
+  .kpi .value { font-size: 22px; font-weight: 700; color: #fff; }
+  .kpi .value.green { color: #4ade80; }
+  .kpi .value.red { color: #f87171; }
+  .kpi .value.blue { color: #38bdf8; }
+  .kpi .sub { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+  /* Cards */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .full { grid-column: 1 / -1; }
+
+  .card { background: #1e293b; border-radius: 10px; padding: 18px; border: 1px solid #334155; }
+  .card h2 { font-size: 13px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .dot.red { background: #f87171; }
+  .dot.green { background: #4ade80; }
+  .dot.blue { background: #38bdf8; }
+  .dot.amber { background: #fbbf24; }
+  .dot.purple { background: #a78bfa; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: #64748b; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; padding: 6px 8px; border-bottom: 1px solid #334155; }
+  td { padding: 7px 8px; border-bottom: 1px solid rgba(30,41,59,0.8); color: #cbd5e1; }
+  tr:hover td { background: rgba(56, 189, 248, 0.04); }
+
+  .pos { display: inline-block; min-width: 28px; text-align: center; padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+  .pos.p1 { background: #065f46; color: #6ee7b7; }
+  .pos.p2 { background: #713f12; color: #fde68a; }
+  .pos.p3 { background: #7f1d1d; color: #fca5a5; }
+  .pos.none { background: #1e293b; color: #475569; border: 1px solid #334155; }
+
+  .sv { color: #38bdf8; font-weight: 600; }
+  .url { color: #64748b; font-size: 12px; font-family: 'Cascadia Code', 'Fira Code', monospace; }
+
+  /* Problem Banner */
+  .banner { border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; line-height: 1.6; }
+  .banner.red { background: linear-gradient(135deg, #450a0a 0%, #1e293b 100%); border: 1px solid #7f1d1d; }
+  .banner.green { background: linear-gradient(135deg, #052e16 0%, #1e293b 100%); border: 1px solid #166534; }
+  .banner strong { color: #fca5a5; }
+  .banner.green strong { color: #86efac; }
+
+  /* Tree */
+  .tree { font-size: 13px; font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace; line-height: 1.8; }
+  .tree .f { color: #fbbf24; } /* folder */
+  .tree .p { color: #94a3b8; } /* page */
+  .tree .c { color: #475569; font-style: italic; } /* comment */
+  .tree .h { color: #f87171; } /* highlight problem */
+  .tree .n { color: #4ade80; } /* new */
+  .tree .indent { padding-left: 20px; display: block; }
+  .tree .indent2 { padding-left: 40px; display: block; }
+  .tree .indent3 { padding-left: 60px; display: block; }
+
+  /* Matrix */
+  .matrix th { font-size: 10px; padding: 5px 6px; }
+  .matrix td { padding: 5px 6px; text-align: center; font-size: 13px; }
+  .matrix td.yes { color: #4ade80; font-weight: 700; }
+  .matrix td.no { color: #334155; }
+  .matrix td:first-child { text-align: left; font-weight: 500; color: #e2e8f0; }
+
+  /* Quick Wins */
+  .wins { list-style: none; }
+  .wins li { padding: 10px 12px; border-radius: 8px; margin-bottom: 6px; background: #0f172a; border: 1px solid #334155; display: flex; align-items: center; gap: 10px; font-size: 13px; }
+  .wins .n { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; background: #334155; color: #94a3b8; }
+  .wins strong { color: #fff; }
+
+  /* Locations */
+  .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .loc-group h3 { font-size: 11px; color: #64748b; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .loc-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .loc-tag { font-size: 11px; padding: 3px 8px; background: #0f172a; border: 1px solid #334155; border-radius: 4px; color: #94a3b8; }
+  .loc-tag.p { border-color: #38bdf8; color: #38bdf8; }
+
+  /* Competitors */
+  .comp { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(51,65,85,0.5); font-size: 13px; }
+  .comp:last-child { border: none; }
+  .comp .name { color: #e2e8f0; font-weight: 500; min-width: 130px; }
+  .comp .type { color: #64748b; font-size: 12px; }
+
+  /* Impact */
+  .impact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .impact-box { text-align: center; padding: 24px 16px; background: #0f172a; border-radius: 10px; border: 1px solid #334155; }
+  .impact-box .big { font-size: 36px; font-weight: 800; }
+  .impact-box .big.green { color: #4ade80; }
+  .impact-box .big.blue { color: #38bdf8; }
+  .impact-box .lbl { font-size: 13px; color: #64748b; margin-top: 4px; }
+
+  /* Subdomain table */
+  .sub-table td:first-child { font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 12px; color: #f87171; }
+  .sub-table td:nth-child(2) { color: #64748b; }
+  .sub-table td:nth-child(3) { font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 12px; color: #4ade80; }
+
+  /* Arrow */
+  .arrow { color: #475569; padding: 0 6px; }
+
+  /* Nav tree section divider */
+  .section-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin: 16px 0 8px; padding-top: 12px; border-top: 1px solid #334155; }
+  .section-label:first-child { border: none; margin-top: 0; padding-top: 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span>medbase.ch</span> &mdash; Keyword & Relaunch Board</h1>
+  <div class="meta">SISTRIX CH &bull; 09.02.2026</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('dashboard')">Dashboard</div>
+  <div class="tab" onclick="showTab('struktur')">Aktuelle Struktur</div>
+  <div class="tab" onclick="showTab('keywords')">Keyword-Mapping</div>
+  <div class="tab" onclick="showTab('neu')">Neue Struktur</div>
+  <div class="tab" onclick="showTab('standorte')">Standorte</div>
+</div>
+
+<!-- ==================== TAB: DASHBOARD ==================== -->
+<div id="dashboard" class="tab-content active">
+
+  <div class="kpi-bar">
+    <div class="kpi"><div class="label">Sichtbarkeit</div><div class="value blue">2.39</div><div class="sub">Allzeithoch: 2.58</div></div>
+    <div class="kpi"><div class="label">Keywords</div><div class="value">17'538</div><div class="sub">Seite 1: 217 | Seite 2: 237</div></div>
+    <div class="kpi"><div class="label">Org. Traffic</div><div class="value">~115k</div><div class="sub">Klicks / Monat</div></div>
+    <div class="kpi"><div class="label">Traffic-Wert</div><div class="value green">282k</div><div class="sub">CHF / Monat</div></div>
+    <div class="kpi"><div class="label">Standorte</div><div class="value">40+</div><div class="sub">DE-CH + FR-CH</div></div>
+    <div class="kpi"><div class="label">Brand vs Generic</div><div class="value red">&gt;95%</div><div class="sub">nur Brand-Rankings</div></div>
+  </div>
+
+  <div class="banner red">
+    <strong>Kernproblem:</strong> &gt;95% aller Rankings sind Brand-Keywords (&laquo;medbase + ort&raquo;). Generische Begriffe wie &laquo;hausarzt z&uuml;rich&raquo; (1'750 SV), &laquo;physiotherapie bern&raquo; (1'250 SV) oder &laquo;psychiater z&uuml;rich&raquo; (2'950 SV) fehlen komplett.
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2><span class="dot green"></span> Quick Wins</h2>
+      <ol class="wins">
+        <li><span class="n">1</span><div><strong>&laquo;massage&raquo;</strong> Pos. 25 &rarr; Top 10 &mdash; SV 100'000</div></li>
+        <li><span class="n">2</span><div><strong>kinesiologie + craniosacral</strong> Pos. 11 &rarr; Seite 1 &mdash; SV 10'200</div></li>
+        <li><span class="n">3</span><div><strong>48 Fachgebiet-Stadt-Seiten</strong> erstellen &mdash; 6 St&auml;dte &times; 8 Fachgebiete</div></li>
+        <li><span class="n">4</span><div><strong>237 KW Seite 2 &rarr; Seite 1</strong> &mdash; Content & Titles optimieren</div></li>
+        <li><span class="n">5</span><div><strong>Title Tags</strong> &mdash; &laquo;Detail Medizin&raquo; &rarr; &laquo;Dermatologie Z&uuml;rich | Medbase&raquo;</div></li>
+      </ol>
+    </div>
+    <div class="card">
+      <h2><span class="dot red"></span> SEO-Wettbewerber</h2>
+      <div class="comp"><span class="name">onedoc.ch</span><span class="type">Arzt-Vermittlung &mdash; #1 f&uuml;r &laquo;hausarzt z&uuml;rich&raquo;</span></div>
+      <div class="comp"><span class="name">physiozentrum.ch</span><span class="type">Physio-Kette &mdash; #1 f&uuml;r &laquo;physiotherapie z&uuml;rich&raquo;</span></div>
+      <div class="comp"><span class="name">hirslanden.ch</span><span class="type">Klinikgruppe &mdash; breite Sichtbarkeit</span></div>
+      <div class="comp"><span class="name">comparis.ch</span><span class="type">Vergleichsportal</span></div>
+      <div class="comp"><span class="name">usz.ch</span><span class="type">Universit&auml;tsspital Z&uuml;rich</span></div>
+      <div class="comp"><span class="name">swissmedical.net</span><span class="type">Klinikgruppe</span></div>
+      <div style="margin-top: 16px;"></div>
+      <h2><span class="dot green"></span> Erwarteter Impact</h2>
+      <div class="impact-grid">
+        <div class="impact-box"><div class="big green">+30-50%</div><div class="lbl">org. Traffic</div></div>
+        <div class="impact-box"><div class="big blue">+30k-60k</div><div class="lbl">Klicks / Monat</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="dot amber"></span> Traffic-Verteilung (IST)</h2>
+    <table>
+      <tr><th>Bereich</th><th>Anteil</th><th>Klicks/Mt</th><th>Keywords</th><th>Bewertung</th></tr>
+      <tr><td>/ (Homepage)</td><td>49.3%</td><td class="sv">56'683</td><td>11'366</td><td><span class="pos p1">ok</span></td></tr>
+      <tr><td>/standorte/</td><td>33.0%</td><td class="sv">37'934</td><td>4'750</td><td><span class="pos p2">ausbauf&auml;hig</span></td></tr>
+      <tr><td>/angebot/</td><td>7.1%</td><td class="sv">8'175</td><td>2'930</td><td><span class="pos p3">schwach</span></td></tr>
+      <tr><td>sport.medbase.ch</td><td>4.1%</td><td class="sv">4'642</td><td>808</td><td><span class="pos p2">fragmentiert</span></td></tr>
+      <tr><td>/aktuell/ (Blog)</td><td>1.4%</td><td class="sv">1'566</td><td>1'918</td><td><span class="pos p3">schwach</span></td></tr>
+      <tr><td>/fr/ (Franz.)</td><td>1.3%</td><td class="sv">1'501</td><td>459</td><td><span class="pos p2">ausbauf&auml;hig</span></td></tr>
+      <tr><td>/en/ (Englisch)</td><td>1.3%</td><td class="sv">1'459</td><td>213</td><td><span class="pos none">gering</span></td></tr>
+    </table>
+  </div>
+
+</div>
+
+<!-- ==================== TAB: AKTUELLE STRUKTUR ==================== -->
+<div id="struktur" class="tab-content">
+
+  <div class="banner red">
+    <strong>Strukturprobleme:</strong> Flache Service-Seiten ohne Ortsbezug. Inkonsistente URL-Pfade (detail-medizin, detail-service, detail-therapie). Standort-Seiten sind reine Kontaktseiten ohne Content. Autorit&auml;t &uuml;ber 5 Domains verteilt.
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2><span class="dot amber"></span> Navigation (DE)</h2>
+      <div class="tree">
+<span class="f">medbase.ch</span>
+<span class="indent"><span class="f">Angebot</span> /angebot/</span>
+<span class="indent"><span class="f">Standorte</span> /standorte/</span>
+<span class="indent"><span class="f">Betriebliche Gesundheit</span> /betriebliche-gesundheit/</span>
+<span class="indent"><span class="f">Services</span> /services/</span>
+<span class="indent"><span class="f">Aktuell</span> /aktuell/</span>
+<span class="indent"><span class="f">&Uuml;ber Medbase</span> /ueber-medbase/</span>
+      </div>
+    </div>
+    <div class="card">
+      <h2><span class="dot red"></span> Separate Domains</h2>
+      <table class="sub-table">
+        <tr><th>Domain</th><th>Zweck</th></tr>
+        <tr><td>sport.medbase.ch</td><td>Sportmedizin</td></tr>
+        <tr><td>jobs.medbase.ch</td><td>Karriere</td></tr>
+        <tr><td>medbase-apotheken.ch</td><td>40+ Apotheken</td></tr>
+        <tr><td>zahnarztzentrum.ch</td><td>30+ Zahnarztzentren</td></tr>
+        <tr><td>fitimjob.ch</td><td>Corporate Health</td></tr>
+        <tr><td>portal.medbase.ch</td><td>Patientenportal</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2><span class="dot amber"></span> /angebot/ &mdash; Vollst&auml;ndiger Baum</h2>
+      <div class="tree" style="font-size: 12px; line-height: 1.7;">
+<span class="f">/angebot/</span>
+<span class="indent"><span class="f">/detail-medizin/medizin/</span> <span class="c">&larr; 44 Unterseiten</span></span>
+<span class="indent2"><span class="p">Allergologie, Allg. Innere Medizin, Chiropraktik,</span></span>
+<span class="indent2"><span class="p">Chirurgie, Dermatologie, Endokrinologie,</span></span>
+<span class="indent2"><span class="p">Gyn&auml;kologie, HNO, Kardiologie,</span></span>
+<span class="indent2"><span class="p">Kinder- & Jugendmedizin, Neurochirurgie,</span></span>
+<span class="indent2"><span class="p">Notfallmedizin, Onkologie, Ophthalmologie,</span></span>
+<span class="indent2"><span class="p">Orthop&auml;die, Pneumologie, Psychiatrie,</span></span>
+<span class="indent2"><span class="p">Reisemedizin, Rheumatologie, Sportmedizin,</span></span>
+<span class="indent2"><span class="p">Urologie, Wirbels&auml;ulenorthop&auml;die ...</span></span>
+<span class="indent"><span class="f">/detail-therapie/therapie-beratung/</span> <span class="c">&larr; 40 Unterseiten</span></span>
+<span class="indent2"><span class="p">Physiotherapie, Osteopathie, Ern&auml;hrungsberatung,</span></span>
+<span class="indent2"><span class="p">Schmerztherapie, Sportphysiotherapie,</span></span>
+<span class="indent2"><span class="p">Manuelle Therapie, Beckenbodenrehab.,</span></span>
+<span class="indent2"><span class="p">Dry Needling, Stosswellentherapie ...</span></span>
+<span class="indent"><span class="f">/detail-massage/</span></span>
+<span class="indent"><span class="f">/detail-checkup/</span></span>
+<span class="indent"><span class="f">/detail-komplementaer/</span> <span class="c">&larr; Kinesiologie, Craniosacral, Akupunktur, Shiatsu ...</span></span>
+<span class="indent"><span class="f">/kurse/</span></span>
+<span class="indent"><span class="f">/zahnmedizin/</span></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot red"></span> Probleme im Detail</h2>
+      <table>
+        <tr><th>Problem</th><th>Auswirkung</th></tr>
+        <tr>
+          <td><strong>Kein Ortsbezug</strong></td>
+          <td>/angebot/detail-service/medizin/dermatologie/ ist generisch &mdash; rankt nicht f&uuml;r &laquo;dermatologie z&uuml;rich&raquo;</td>
+        </tr>
+        <tr>
+          <td><strong>Inkonsistente URLs</strong></td>
+          <td>detail-medizin, detail-service, detail-therapie, detail-massage &mdash; keine klare Hierarchie</td>
+        </tr>
+        <tr>
+          <td><strong>Schwache Title Tags</strong></td>
+          <td>&laquo;Detail Medizin - Medbase&raquo; statt &laquo;Dermatologie | Medbase&raquo;</td>
+        </tr>
+        <tr>
+          <td><strong>Standorte = Kontaktseiten</strong></td>
+          <td>Kein Content, keine Fachgebiet-Infos, kein Team &mdash; kann nicht f&uuml;r generische KW ranken</td>
+        </tr>
+        <tr>
+          <td><strong>5 separate Domains</strong></td>
+          <td>Link-Autorit&auml;t verteilt sich auf sport., apotheken., zahnarztzentrum., fitimjob., jobs.</td>
+        </tr>
+        <tr>
+          <td><strong>Blog kaum Traffic</strong></td>
+          <td>/aktuell/ hat 1'918 KW aber nur 1.4% Traffic-Anteil &mdash; Content nicht zielgerichtet</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== TAB: KEYWORD-MAPPING ==================== -->
+<div id="keywords" class="tab-content">
+
+  <div class="grid-2">
+    <div class="card">
+      <h2><span class="dot red"></span> Medizin &mdash; Nicht rankend</h2>
+      <table>
+        <tr><th>Keyword</th><th>SV/Mt</th><th>Pos.</th><th>Neue URL</th></tr>
+        <tr><td>psychiater z&uuml;rich</td><td class="sv">2'950</td><td><span class="pos none">&ndash;</span></td><td class="url">/medizin/psychiatrie/zuerich/</td></tr>
+        <tr><td>chiropraktiker z&uuml;rich</td><td class="sv">2'500</td><td><span class="pos none">&ndash;</span></td><td class="url">/medizin/chiropraktik/zuerich/</td></tr>
+        <tr><td>dermatologie z&uuml;rich</td><td class="sv">2'000</td><td><span class="pos none">&ndash;</span></td><td class="url">/medizin/dermatologie/zuerich/</td></tr>
+        <tr><td>hausarzt z&uuml;rich</td><td class="sv">1'750</td><td><span class="pos none">&ndash;</span></td><td class="url">/medizin/hausarzt/zuerich/</td></tr>
+        <tr><td>hausarzt bern</td><td class="sv">1'650</td><td><span class="pos none">&ndash;</span></td><td class="url">/medizin/hausarzt/bern/</td></tr>
+        <tr><td>hausarzt winterthur</td><td class="sv">500</td><td><span class="pos none">&ndash;</span></td><td class="url">/medizin/hausarzt/winterthur/</td></tr>
+        <tr><td>hausarzt luzern</td><td class="sv">300</td><td><span class="pos none">&ndash;</span></td><td class="url">/medizin/hausarzt/luzern/</td></tr>
+        <tr><td>reisemedizin</td><td class="sv">200</td><td><span class="pos none">&ndash;</span></td><td class="url">/medizin/reisemedizin/</td></tr>
+        <tr><td>hausarzt basel</td><td class="sv">200</td><td><span class="pos none">&ndash;</span></td><td class="url">/medizin/hausarzt/basel/</td></tr>
+        <tr><td>sportmedizin</td><td class="sv">100</td><td><span class="pos none">&ndash;</span></td><td class="url">/medizin/sportmedizin/</td></tr>
+        <tr><td>notfall arzt z&uuml;rich</td><td class="sv">70</td><td><span class="pos none">&ndash;</span></td><td class="url">/permanence/zuerich-hb/</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot blue"></span> Therapie & Massage &mdash; Nicht rankend</h2>
+      <table>
+        <tr><th>Keyword</th><th>SV/Mt</th><th>Pos.</th><th>Neue URL</th></tr>
+        <tr><td><strong>massage</strong></td><td class="sv">100'000</td><td><span class="pos p3">25</span></td><td class="url">/massage/</td></tr>
+        <tr><td>physiotherapie z&uuml;rich</td><td class="sv">1'750</td><td><span class="pos none">&ndash;</span></td><td class="url">/therapie/physiotherapie/zuerich/</td></tr>
+        <tr><td>osteopathie z&uuml;rich</td><td class="sv">1'500</td><td><span class="pos none">&ndash;</span></td><td class="url">/therapie/osteopathie/zuerich/</td></tr>
+        <tr><td>ern&auml;hrungsberatung</td><td class="sv">1'500</td><td><span class="pos none">&ndash;</span></td><td class="url">/therapie/ernaehrungsberatung/</td></tr>
+        <tr><td>physiotherapie bern</td><td class="sv">1'250</td><td><span class="pos none">&ndash;</span></td><td class="url">/therapie/physiotherapie/bern/</td></tr>
+        <tr><td>med. massage</td><td class="sv">950</td><td><span class="pos none">&ndash;</span></td><td class="url">/massage/medizinische-massage/</td></tr>
+        <tr><td>akupunktur z&uuml;rich</td><td class="sv">550</td><td><span class="pos none">&ndash;</span></td><td class="url">/komplementaer/akupunktur/zuerich/</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot purple"></span> Komplement&auml;r & Checkup</h2>
+      <table>
+        <tr><th>Keyword</th><th>SV/Mt</th><th>Pos.</th><th>Neue URL</th></tr>
+        <tr><td>kinesiologie</td><td class="sv">6'100</td><td><span class="pos p2">11</span></td><td class="url">/komplementaer/kinesiologie/</td></tr>
+        <tr><td>craniosacral therapie</td><td class="sv">4'100</td><td><span class="pos p2">11</span></td><td class="url">/komplementaer/craniosacral/</td></tr>
+        <tr><td>permanence z&uuml;rich</td><td class="sv">1'050</td><td><span class="pos p1">1</span></td><td class="url">/permanence/zuerich-hb/</td></tr>
+        <tr><td>gesundheitscheck</td><td class="sv">150</td><td><span class="pos none">&ndash;</span></td><td class="url">/checkup/gesundheitscheck/</td></tr>
+        <tr><td>spiroergometrie</td><td class="sv">niedrig</td><td><span class="pos p2">11</span></td><td class="url">/checkup/spiroergometrie/</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot amber"></span> Fachgebiet &times; Stadt Matrix</h2>
+      <table class="matrix">
+        <tr><th></th><th>ZH</th><th>BE</th><th>BS</th><th>WI</th><th>SG</th><th>LU</th><th>LA</th><th>GE</th></tr>
+        <tr><td>Hausarzt</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td>Physiotherapie</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td>Chiropraktik</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="no">&ndash;</td><td class="no">&ndash;</td></tr>
+        <tr><td>Dermatologie</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td></tr>
+        <tr><td>Gyn&auml;kologie</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="no">&ndash;</td><td class="yes">&#10003;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td></tr>
+        <tr><td>Psychiatrie</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td></tr>
+        <tr><td>Massage</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td>Sportmedizin</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="no">&ndash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td></tr>
+        <tr><td>Akupunktur</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td></tr>
+        <tr><td>Osteopathie</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td></tr>
+      </table>
+      <div style="margin-top:10px; font-size:11px; color:#64748b;">&#10003; = Landing Page erstellen (sofern Angebot am Standort vorhanden)</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== TAB: NEUE STRUKTUR ==================== -->
+<div id="neu" class="tab-content">
+
+  <div class="banner green">
+    <strong>Kernidee:</strong> Fachgebiet-x-Stadt-Seiten kombinieren das Angebot mit dem Standort. Statt einer generischen Seite &laquo;Dermatologie&raquo; gibt es &laquo;Dermatologie Z&uuml;rich&raquo;, &laquo;Dermatologie Bern&raquo; etc. &mdash; das ist genau das, wonach Patienten suchen.
+  </div>
+
+  <div class="grid-2">
+    <div class="card" style="grid-column: 1 / -1;">
+      <h2><span class="dot green"></span> Neue URL-Architektur</h2>
+      <div class="tree">
+<span class="n f">medbase.ch/</span>
+
+<span class="indent"><span class="n f">/medizin/</span></span>
+<span class="indent2"><span class="n">/hausarzt/</span> <span class="c">&larr; Fachgebiet-&Uuml;bersicht + alle Standorte mit Hausarzt</span></span>
+<span class="indent3"><span class="n">/zuerich/</span> <span class="c">&larr; Fachgebiet + Stadt Landing Page</span></span>
+<span class="indent3"><span class="n">/bern/</span></span>
+<span class="indent3"><span class="n">/basel/ /winterthur/ /st-gallen/ /luzern/ ...</span></span>
+<span class="indent2"><span class="n">/dermatologie/</span></span>
+<span class="indent3"><span class="n">/zuerich/ /bern/ /basel/ /winterthur/ ...</span></span>
+<span class="indent2"><span class="n">/chiropraktik/ /gynaekologie/ /psychiatrie-psychotherapie/</span></span>
+<span class="indent2"><span class="n">/sportmedizin/ /kardiologie/ /notfallmedizin/ /reisemedizin/ ...</span></span>
+
+<span class="indent"><span class="n f">/therapie/</span></span>
+<span class="indent2"><span class="n">/physiotherapie/</span></span>
+<span class="indent3"><span class="n">/zuerich/ /bern/ /winterthur/ ...</span></span>
+<span class="indent2"><span class="n">/osteopathie/ /ernaehrungsberatung/ /schmerztherapie/ /sportphysiotherapie/</span></span>
+
+<span class="indent"><span class="n f">/massage/</span> <span class="c">&larr; Eigener Hub (SV 100'000)</span></span>
+<span class="indent2"><span class="n">/medizinische-massage/</span></span>
+<span class="indent3"><span class="n">/zuerich/ /bern/ ...</span></span>
+<span class="indent2"><span class="n">/lymphdrainage/</span></span>
+
+<span class="indent"><span class="n f">/komplementaer/</span></span>
+<span class="indent2"><span class="n">/kinesiologie/ /craniosacral-therapie/ /akupunktur/ /shiatsu/</span></span>
+
+<span class="indent"><span class="n f">/checkup/</span></span>
+<span class="indent2"><span class="n">/gesundheitscheck/ /leistungsdiagnostik/ /spiroergometrie/</span></span>
+
+<span class="indent"><span class="n f">/permanence/</span></span>
+<span class="indent2"><span class="n">/zuerich-hauptbahnhof/ /basel/</span></span>
+
+<span class="indent"><span class="n f">/standorte/</span> <span class="c">&larr; Stadt-Hubs statt flacher Liste</span></span>
+<span class="indent2"><span class="n">/zuerich/</span> <span class="c">&larr; Alle ZH-Standorte + Karte</span></span>
+<span class="indent3"><span class="n">/oerlikon/ /wiedikon/ /loewenstrasse/</span></span>
+<span class="indent2"><span class="n">/bern/</span></span>
+<span class="indent3"><span class="n">/bahnhof/ /zentrum/ /westside/</span></span>
+<span class="indent2"><span class="n">/basel/ /winterthur/ /st-gallen/ /luzern/ ...</span></span>
+
+<span class="indent"><span class="n f">/ratgeber/</span> <span class="c">&larr; Content-Hub (ersetzt /aktuell/)</span></span>
+<span class="indent2"><span class="n">/ernaehrung/ /sport-bewegung/ /krankheitsbilder/ /praevention/</span></span>
+
+<span class="indent"><span class="n">/betriebliche-gesundheit/</span></span>
+<span class="indent"><span class="n">/apotheken/</span> <span class="c">&larr; von medbase-apotheken.ch</span></span>
+<span class="indent"><span class="n">/zahnmedizin/</span> <span class="c">&larr; von zahnarztzentrum.ch</span></span>
+<span class="indent"><span class="n">/karriere/</span> <span class="c">&larr; von jobs.medbase.ch</span></span>
+<span class="indent"><span class="n">/fr/ + /en/</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2><span class="dot amber"></span> Redirect-Mapping (Beispiele)</h2>
+      <table class="sub-table">
+        <tr><th>Alt</th><th></th><th>Neu</th></tr>
+        <tr><td>/angebot/detail-service/medizin/dermatologie/</td><td class="arrow">&rarr;</td><td>/medizin/dermatologie/</td></tr>
+        <tr><td>/angebot/detail-service/therapie-beratung/physiotherapie/</td><td class="arrow">&rarr;</td><td>/therapie/physiotherapie/</td></tr>
+        <tr><td>/angebot/detail-massage/medizinische-massage/</td><td class="arrow">&rarr;</td><td>/massage/medizinische-massage/</td></tr>
+        <tr><td>/angebot/detail-komplementaer/kinesiologie/</td><td class="arrow">&rarr;</td><td>/komplementaer/kinesiologie/</td></tr>
+        <tr><td>/standorte/detail/medbase-zuerich-oerlikon/</td><td class="arrow">&rarr;</td><td>/standorte/zuerich/oerlikon/</td></tr>
+        <tr><td>/aktuell/detail/news/[slug]/</td><td class="arrow">&rarr;</td><td>/ratgeber/[kategorie]/[slug]/</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot purple"></span> Subdomain-Konsolidierung</h2>
+      <table class="sub-table">
+        <tr><th>Aktuell</th><th></th><th>Neu</th></tr>
+        <tr><td>sport.medbase.ch</td><td class="arrow">&rarr;</td><td>/medizin/sportmedizin/</td></tr>
+        <tr><td>jobs.medbase.ch</td><td class="arrow">&rarr;</td><td>/karriere/</td></tr>
+        <tr><td>medbase-apotheken.ch</td><td class="arrow">&rarr;</td><td>/apotheken/</td></tr>
+        <tr><td>zahnarztzentrum.ch</td><td class="arrow">&rarr;</td><td>/zahnmedizin/</td></tr>
+        <tr><td>fitimjob.ch</td><td class="arrow">&rarr;</td><td>/betriebliche-gesundheit/</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ==================== TAB: STANDORTE ==================== -->
+<div id="standorte" class="tab-content">
+
+  <div class="grid-2">
+    <div class="card">
+      <h2><span class="dot blue"></span> Prim&auml;re St&auml;dte</h2>
+      <table>
+        <tr><th>Stadt</th><th>Standorte</th></tr>
+        <tr><td><strong>Z&uuml;rich</strong></td><td>L&ouml;wenstrasse, Oerlikon, Wiedikon, Permanence HB, Puls 5</td></tr>
+        <tr><td><strong>Bern</strong></td><td>Bahnhof, Zentrum, Westside</td></tr>
+        <tr><td><strong>Basel</strong></td><td>St. Elisabethen, Heuwaage, Toujours Bahnhof</td></tr>
+        <tr><td><strong>Winterthur</strong></td><td>Neuwiesen, Brunngasse, Win4, Archh&ouml;fe</td></tr>
+        <tr><td><strong>St. Gallen</strong></td><td>Vadianplatz, Einstein</td></tr>
+        <tr><td><strong>Luzern</strong></td><td>Allmend, Kriens Mattenhof</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot purple"></span> Franz&ouml;sische Schweiz</h2>
+      <table>
+        <tr><th>Stadt</th><th>Standorte</th></tr>
+        <tr><td><strong>Lausanne</strong></td><td>Gare, Malley</td></tr>
+        <tr><td><strong>Gen&egrave;ve</strong></td><td>Gare Cornavin, Lancy Pont-Rouge</td></tr>
+        <tr><td>Vevey</td><td>Vevey</td></tr>
+        <tr><td>Neuch&acirc;tel</td><td>La C&ocirc;te</td></tr>
+        <tr><td>Fribourg</td><td>Fribourg</td></tr>
+        <tr><td>D&uuml;dingen</td><td>D&uuml;dingen</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot amber"></span> Sekund&auml;re St&auml;dte</h2>
+      <div class="loc-tags" style="gap: 6px;">
+        <span class="loc-tag">Thun</span>
+        <span class="loc-tag">Baden</span>
+        <span class="loc-tag">Schaffhausen</span>
+        <span class="loc-tag">Zug</span>
+        <span class="loc-tag">Uster</span>
+        <span class="loc-tag">Wetzikon</span>
+        <span class="loc-tag">Kloten</span>
+        <span class="loc-tag">Hinwil</span>
+        <span class="loc-tag">Eglisau</span>
+        <span class="loc-tag">Zweisimmen</span>
+        <span class="loc-tag">Gampelen</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot green"></span> Ostschweiz-Cluster</h2>
+      <div class="loc-tags" style="gap: 6px;">
+        <span class="loc-tag">Kreuzlingen</span>
+        <span class="loc-tag">Frauenfeld</span>
+        <span class="loc-tag">Weinfelden</span>
+        <span class="loc-tag">Amriswil</span>
+        <span class="loc-tag">Bischofszell</span>
+        <span class="loc-tag">Wil</span>
+        <span class="loc-tag">Uzwil</span>
+        <span class="loc-tag">Gossau</span>
+        <span class="loc-tag">Rorschach</span>
+        <span class="loc-tag">Heerbrugg</span>
+        <span class="loc-tag">Diepoldsau</span>
+        <span class="loc-tag">Teufen</span>
+        <span class="loc-tag">Wattwil</span>
+        <span class="loc-tag">Abtwil</span>
+        <span class="loc-tag">Thal</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>

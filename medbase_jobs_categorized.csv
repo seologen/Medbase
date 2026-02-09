@@ -1,0 +1,127 @@
+Nr;Titel;Standort;Hierarchie-Stufe;Berufsgruppe
+1;Fachfrau / Fachmann Apotheke (a) 100%;Oensingen;Fachperson/Fachangestellte;Pharma-Assistenz
+2;Medizinische Praxisassistenz (a) 60-80%;Uzwil;Fachperson/Fachangestellte;MPA
+3;Medizinische Praxisassistenz (a) 60-100%;Thun;Fachperson/Fachangestellte;MPA
+4;Teamleitung Hausarztmedizin (a) 80-100%;Winterthur;Teamleitung/Fuehrung;Aerzte
+5;Apotheker:in (a) 40 - 60%;Biel;Fachperson/Fachangestellte;Apotheker
+6;Apotheker:in (a) 80 - 100%, Bern Marktgasse;Bern;Fachperson/Fachangestellte;Apotheker
+7;Apotheker BAB (a) 60% Basel Vogesen;Basel;Fachperson/Fachangestellte;Apotheker
+8;Pharma-Assistenz (a) 80-100% - Aarau Telli;Aarau;Fachperson/Fachangestellte;Pharma-Assistenz
+9;Apotheker (a) 60-100% - Aarau Telli;Aarau;Fachperson/Fachangestellte;Apotheker
+10;Medizinische Praxisassistenz (a) 60-80%;Wetzikon;Fachperson/Fachangestellte;MPA
+11;Medizinische Praxisassistenz (a) 60-100%;Baden;Fachperson/Fachangestellte;MPA
+12;Teamleitung Medizinische Praxisassistenz / Praxiskoordination (a) 100%;Baden;Teamleitung/Fuehrung;MPA
+13;Fachfrau / Fachmann Apotheke oder Drogist:in (a) 80-100% - Zuerich Rotbuch;Zuerich;Fachperson/Fachangestellte;Pharma-Assistenz
+14;Category & Visual Merchandiser:in (a) 80-100%;Winterthur;Fachperson/Fachangestellte;Admin/Sekretariat
+15;Leitung Medical Center (a) 100% - Basel Heuwaage;Basel;Geschaeftsleitung/Management;Admin/Sekretariat
+16;Fachfrau / Fachmann Apotheke (a) 80-100%;St. Gallen;Fachperson/Fachangestellte;Pharma-Assistenz
+17;Fachaerztin / Facharzt Allgemeine Innere Medizin (a) 50-80% - Zuerich HB Permanence;Zuerich;Fachperson/Fachangestellte;Aerzte
+18;Pharma-Assistent Produktion Dailymed (a) 60-80%;Frauenfeld;Fachperson/Fachangestellte;Pharma-Assistenz
+19;Fachfrau / Fachmann Apotheke (a) 20-40%;Herisau;Fachperson/Fachangestellte;Pharma-Assistenz
+20;Medizinische Praxisassistenz Fachbereich Gynaekologie (a) 80-100%;Winterthur;Fachperson/Fachangestellte;MPA
+21;Medizinische Praxisassistenz Fachbereich Kardiologie (a) 80-100%;Winterthur;Fachperson/Fachangestellte;MPA
+22;Fachaerztin/Facharzt Allgemeine Innere Medizin oder Praktische Aerztin/Arzt (a);Heerbrugg;Fachperson/Fachangestellte;Aerzte
+23;Fachaerztin / Facharzt Allgemeine Innerer Medizin oder Praktische Aerztin/Praktischer Arzt (a);Diepoldsau;Fachperson/Fachangestellte;Aerzte
+24;Apotheker:in (a) 80-100% Winterthur Toess;Winterthur;Fachperson/Fachangestellte;Apotheker
+25;Pharma-Assistenz (a) 100%;Uster;Fachperson/Fachangestellte;Pharma-Assistenz
+26;Medizinische Praxisassistenz (a) 100%;Winterthur;Fachperson/Fachangestellte;MPA
+27;Medizinische Praxisassistenz (a) 100%;Weinfelden;Fachperson/Fachangestellte;MPA
+28;Fachaerztin / Facharzt Allgemeine Innere Medizin (a) 60-100%;Teufen;Fachperson/Fachangestellte;Aerzte
+29;Fachaerztin/Facharzt fuer Dermatologie (a) 50-60%;Teufen;Fachperson/Fachangestellte;Aerzte
+30;Fachfrau / Fachmann Apotheke (a) 60 - 100%;Meiringen;Fachperson/Fachangestellte;Pharma-Assistenz
+31;Mitarbeiter:in Administration Therapien (a) 100% - Zuerich-Oerlikon;Zuerich;Fachperson/Fachangestellte;Admin/Sekretariat
+32;Medizinische Praxisassistenz (a) 50-100% - Zuerich-Oerlikon;Zuerich;Fachperson/Fachangestellte;MPA
+33;Fachaerztin/Facharzt Allgemeine Innere Medizin (a) 80-100%;Uster;Fachperson/Fachangestellte;Aerzte
+34;Pharma-Assistenz (a) 10-50 % - Zuerich Enge, Wochenend-Einsaetze;Zuerich;Fachperson/Fachangestellte;Pharma-Assistenz
+35;Koordinator:in Apotheke (a) 80-100% - Zuerich Kreis 12;Zuerich;Teamleitung/Fuehrung;Apotheker
+36;Medecin specialiste en cardiologie (tous genres) 50 - 100%;Aigle (MC);Fachperson/Fachangestellte;Aerzte
+37;Medecin specialiste en medecin interne generale (tous genres) 50-100%;Aigle (MC);Fachperson/Fachangestellte;Aerzte
+38;Medecin specialiste en pediatrie (tous genres) 50 - 100%;Aigle (MC);Fachperson/Fachangestellte;Aerzte
+39;Geschaeftsfuehrende:r Apotheker:in (a) 80-100%;Meiringen;Geschaeftsleitung/Management;Apotheker
+40;Fachaerztin / Facharzt Allgemeine Innere Medizin (a) 50-100%;Thun;Fachperson/Fachangestellte;Aerzte
+41;Medizinische Praxisassistentin (a) 80-100%;Bern;Fachperson/Fachangestellte;MPA
+42;Medizinische Praxisassistenz (a) 80 - 100%;Gampelen;Fachperson/Fachangestellte;MPA
+43;Business Development & Key Account Manager Pharma (a) 60-100%;Frauenfeld;Fachperson/Fachangestellte;IT/Business
+44;Growth Manager Insurance Partnerships & Ecosystems (a) 80-100%;Frauenfeld;Fachperson/Fachangestellte;IT/Business
+45;Pharma-Assistentin (a) 80%;St. Gallen;Fachperson/Fachangestellte;Pharma-Assistenz
+46;Regionenleiter:in Medical Center Deutschschweiz (a) 80 - 100%;Winterthur;Geschaeftsleitung/Management;Admin/Sekretariat
+47;Med. Praxisassistent/-in EFZ oder Fachperson Apotheke (a) 60-100%;Kreuzlingen;Fachperson/Fachangestellte;MPA
+48;Medizinische Praxisassistenz (a) 100%;Schaffhausen;Fachperson/Fachangestellte;MPA
+49;Chef·fe de clinique adjoint·e (tous genres) 80 - 100%;Neuchatel;Teamleitung/Fuehrung;Aerzte
+50;Medecin Cadre - Permanence medicale;Corcelles;Teamleitung/Fuehrung;Aerzte
+51;Fachaerztin / Facharzt Allgemeine Innere Medizin (a) 50-100%;Schaffhausen;Fachperson/Fachangestellte;Aerzte
+52;Fachaerztin/Facharzt Allgemeine Innere Medizin oder Praktische Aerztin/Praktischer Arzt (a) 80-100%;Wetzikon;Fachperson/Fachangestellte;Aerzte
+53;Pharma-Assistenz (a) 20%;Uster;Fachperson/Fachangestellte;Pharma-Assistenz
+54;Pharma-Assistenz (a) 80 - 100%;Wittenbach;Fachperson/Fachangestellte;Pharma-Assistenz
+55;Fachaerztin/Facharzt Allgemeine Innere Medizin oder Praktische Aerztin/Praktischer Arzt (a) 80-100%;Wil;Fachperson/Fachangestellte;Aerzte
+56;Medizinische:r Praxisassistent:in (a) 80 - 100%;Kriens;Fachperson/Fachangestellte;MPA
+57;Assistant·e medical·e (tous genres) 80-90%;Fribourg;Fachperson/Fachangestellte;MPA
+58;Pharma-Assistenz (a) 60% Duebendorf;Duebendorf;Fachperson/Fachangestellte;Pharma-Assistenz
+59;Werkstudent:in Digital Publishing Health Content (a) 50%;Winterthur;Lehrstelle/Ausbildung;IT/Business
+60;Medizinische Praxisassistenz (a) 60-80%;Schaffhausen;Fachperson/Fachangestellte;MPA
+61;Medizinische Praxisassistenz (a) 60-80%;Schaffhausen;Fachperson/Fachangestellte;MPA
+62;Teamleitung Medizinische Praxisassistenz / Praxiskoordination (a) 100%;Winterthur;Teamleitung/Fuehrung;MPA
+63;Fachaerztin / Facharzt fuer Allgemeine Innere Medizin (a) 60-100% - Zuerich Loewenstrasse;Zuerich;Fachperson/Fachangestellte;Aerzte
+64;Stv. Leitung Physiotherapie (a) 80-100% - Basel Heuwaage;Basel;Teamleitung/Fuehrung;Physiotherapie
+65;Medizinische Praxisassistenz (a) 80-100%;Abtwil;Fachperson/Fachangestellte;MPA
+66;Fachaerztin / Facharzt fuer Gynaekologie und Geburtshilfe (a) 50-100%;Zuerich;Fachperson/Fachangestellte;Aerzte
+67;Facharzt / Fachaerztin Allgemein Innere Medizin oder Physikalische Medizin & Rehabilitation (a) 40-100% - Basel Heuwaage;Basel;Fachperson/Fachangestellte;Aerzte
+68;Fachaerztin / Facharzt Allgemeine Innere Medizin (a) 100%;Bischofszell;Fachperson/Fachangestellte;Aerzte
+69;Apprenti·e Assistant·e medical·e (tous genres);Corcelles;Lehrstelle/Ausbildung;MPA
+70;Lehrstelle 2026 - Fachfrau / Fachmann Apotheke (a);Oensingen;Lehrstelle/Ausbildung;Pharma-Assistenz
+71;Apotheker:in (a) 60-100%;Meiringen;Fachperson/Fachangestellte;Apotheker
+72;Apotheker:in mit BAB oder in FPH-Weiterbildung (a) 80-100%;Oensingen;Fachperson/Fachangestellte;Apotheker
+73;Assistant·e medical·e (tous genres) 80-100%;Lausanne;Fachperson/Fachangestellte;MPA
+74;Aerztliche Co-Leitung (a) 80-100%;Basel;Geschaeftsleitung/Management;Aerzte
+75;Fachaerztin / Facharzt fuer Dermatologie (a) 80-100%;Kloten;Fachperson/Fachangestellte;Aerzte
+76;Fachaerztin / Facharzt fuer Allgemeine Innere Medizin (a) 50-100%;Wattwil;Fachperson/Fachangestellte;Aerzte
+77;Apotheker:in Winterthur Altstadt und Zentrum Toess (a) zu je 40 - 50%;Winterthur;Fachperson/Fachangestellte;Apotheker
+78;Teamleitung Medizinische Praxisassistenz / Praxiskoordination (a) 100%;Schaffhausen;Teamleitung/Fuehrung;MPA
+79;Fachaerztin / Facharzt Allgemeine Innere Medizin Praktische Aerztin / Praktischer Arzt (a) 50-100%;Gampelen;Fachperson/Fachangestellte;Aerzte
+80;Medecin specialiste en medecine interne generale (tous genres) 80 - 100%;Corcelles;Fachperson/Fachangestellte;Aerzte
+81;Medizinische Praxisassistenz (a) 80-100%;Weinfelden;Fachperson/Fachangestellte;MPA
+82;Medecin generaliste;Vevey;Fachperson/Fachangestellte;Aerzte
+83;Fachaerztin / Facharzt Rheumatologie 50-60% (a);Baden;Fachperson/Fachangestellte;Aerzte
+84;Lehrstelle 2026 - Fachfrau / Fachmann Apotheke (a);Thun;Lehrstelle/Ausbildung;Pharma-Assistenz
+85;Medecin specialiste en medecine interne generale (tous genres) 100%;Corcelles;Fachperson/Fachangestellte;Aerzte
+86;Medizinische Praxisassistenz (a) 40%;Frauenfeld;Fachperson/Fachangestellte;MPA
+87;Stv. Leitung Medical Center (a) (100%);St. Gallen;Teamleitung/Fuehrung;Admin/Sekretariat
+88;Medecin cadre permanence medicale (tous genres) 80 - 100%;Bulle;Teamleitung/Fuehrung;Aerzte
+89;Medecin specialiste en medecin interne generale (tous genres) 80 - 100%;Bulle;Fachperson/Fachangestellte;Aerzte
+90;Fachaerztin / Facharzt Allgemeine Innere Medizin (a) 50-100%;Amriswil;Fachperson/Fachangestellte;Aerzte
+91;Assistenzaerztin /Assistenzarzt im Walk-in Notfall (a) 80-100% - Bern Bahnhof;Bern;Fachperson/Fachangestellte;Aerzte
+92;Physiotherapeut:in (a) 40 - 100%;Wil;Fachperson/Fachangestellte;Physiotherapie
+93;Leitung Medical Center (a) 100%;Schaffhausen;Geschaeftsleitung/Management;Admin/Sekretariat
+94;Medizinische Praxisassistentin (a) 60-100%;Basel;Fachperson/Fachangestellte;MPA
+95;Fachaerztin/Arzt Frauenkrankheiten und Geburtshilfe (a) 50-80%;Kloten;Fachperson/Fachangestellte;Aerzte
+96;Apprenti·e assistant·e medicale (tous genres);Geneve;Lehrstelle/Ausbildung;MPA
+97;Apotheker:in (a) 70 - 100%;Zuchwil;Fachperson/Fachangestellte;Apotheker
+98;Apprenti·e assistant·e medicale (tous genres);Grand-Lancy;Lehrstelle/Ausbildung;MPA
+99;Lehrstelle 2026 - Fachfrau / Fachmann Apotheke (a);Reinach;Lehrstelle/Ausbildung;Pharma-Assistenz
+100;Stv. Leitende Medizinische Praxisassistenz (a) 100% - Zuerich Loewenstrasse;Zuerich;Teamleitung/Fuehrung;MPA
+101;Physiotherapeut:in (a) 40-50%;St. Gallen;Fachperson/Fachangestellte;Physiotherapie
+102;Medecin specialiste en cardiologie (tous genres) 60 - 100%;Lausanne;Fachperson/Fachangestellte;Aerzte
+103;Medecins de premiers recours (tous genres);Lausanne;Fachperson/Fachangestellte;Aerzte
+104;Medecin specialiste en Gynecologie et Obstetrique (tous genres) 80 - 100%;Grand-Lancy;Fachperson/Fachangestellte;Aerzte
+105;Psychologue - Psychotherapeute independant·e (tous genres) 50-100%;Geneve;Fachperson/Fachangestellte;Aerzte
+106;Medecin specialiste en dermatologie (tous genres) 60 - 100%;Lausanne;Fachperson/Fachangestellte;Aerzte
+107;Medecin specialiste en rhumatologie (tous genres) 60 - 100%;Lausanne;Fachperson/Fachangestellte;Aerzte
+108;Apprenti·e Assistant·e medical·e (tous genres);Vevey;Lehrstelle/Ausbildung;MPA
+109;Medecin specialiste (tous genres) 80 - 100%;Geneve;Fachperson/Fachangestellte;Aerzte
+110;Fachaerztin / Facharzt fuer Gynaekologie und Geburtshilfe (a) 50-100%;Gampelen;Fachperson/Fachangestellte;Aerzte
+111;Assistenzaerztin / Assistenzarzt (a) 80-100%;Gampelen;Fachperson/Fachangestellte;Aerzte
+112;Lehrstelle 2026 - Fachfrau / Fachmann Apotheke (a);Allschwil;Lehrstelle/Ausbildung;Pharma-Assistenz
+113;Lehrstelle 2026 - Med. Praxisassistentin / Med. Praxisassistent (a);Gampelen;Lehrstelle/Ausbildung;MPA
+114;Fachaerztin / Facharzt Dermatologie (a) 40-80%;Frauenfeld;Fachperson/Fachangestellte;Aerzte
+115;Fachaerztin / Facharzt Allgemeine Innere Medizin (a) 60-100%;Zweisimmen;Fachperson/Fachangestellte;Aerzte
+116;Fachaerztin / Facharzt Psychiatrie und Psychotherapie (a) 50-100%;Diepoldsau;Fachperson/Fachangestellte;Aerzte
+117;Psychotherapeut:in (a) 60% Bern Zentrum;Bern;Fachperson/Fachangestellte;Aerzte
+118;Fachaerztin / Facharzt Allgemeine Innere Medizin (a) 50-100%;Weinfelden;Fachperson/Fachangestellte;Aerzte
+119;Fachaerztin / Facharzt Allgemeine Innere Medizin oder erweiterte Grundversorgung (a) 60-100%;Duedingen;Fachperson/Fachangestellte;Aerzte
+120;Fachaerztin / Facharzt Allgemeine Innere Medizin FMH (a) 70-100%;Baden;Fachperson/Fachangestellte;Aerzte
+121;Medizinische Leitung Medical Center (a) 80-100%;Baden;Geschaeftsleitung/Management;Aerzte
+122;Fachaerztin / Facharzt Allgemeine Innere Medizin (a) 60-80%;Eglisau;Fachperson/Fachangestellte;Aerzte
+123;Fachaerztin / Facharzt Psychiatrie & Psychotherapie (a) 40-100%;Winterthur;Fachperson/Fachangestellte;Aerzte
+124;Fachaerztin / Facharzt fuer Dermatologie (a) 40-100%;Winterthur;Fachperson/Fachangestellte;Aerzte
+125;Fachaerztin / Facharzt Allgemeine Innere Medizin (a) 60-100%;Kriens;Fachperson/Fachangestellte;Aerzte
+126;Fachaerztin / Facharzt Ophthalmologie (a) 40% - 60%;Kriens;Fachperson/Fachangestellte;Aerzte
