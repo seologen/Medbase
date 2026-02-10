@@ -170,30 +170,31 @@ const berufsfelderV1 = {
     {
       name: 'Medizin & Pflege', type: 'Hauptseite',
       children: ['\u00c4rzt:innen', 'MPA', 'FaGe', 'APN (Advanced Practice Nurse)'],
-      locations: ['Z\u00fcrich', 'Luzern', 'St. Gallen', 'usw.']
+      locations: ['Z\u00fcrich', 'St. Gallen', 'Bern', 'Winterthur', 'Basel', 'Lausanne', 'Luzern', 'Schaffhausen', 'usw.']
     },
     {
       name: 'Pharma & Apotheken', type: 'Hauptseite',
       children: ['Apotheker:innen', 'Pharma-Assistent:innen', 'Fachpersonen Gesundheit Apotheke'],
-      locations: ['Z\u00fcrich', 'Basel', 'Bern', 'usw.']
+      locations: ['Z\u00fcrich', 'Bern', 'Winterthur', 'St. Gallen', 'Basel', 'Aarau', 'Solothurn']
     },
     {
       name: 'Therapie & Rehabilitation', type: 'Hauptseite',
       children: ['Physiotherapeut:innen', 'Ergotherapeut:innen', 'weitere Fachpersonen'],
-      locations: ['Z\u00fcrich', 'Bern', 'Winterthur', 'usw.']
+      locations: ['St. Gallen', 'Basel', 'Bern', 'Gen\u00e8ve']
     },
     {
       name: 'Zahnmedizin', type: 'Hauptseite',
-      children: ['Zahn\u00e4rzt:innen', 'Dentalhygieniker:innen', 'Zahnmedizinische Assistent:innen'],
-      locations: ['Z\u00fcrich', 'Basel', 'Bern', 'usw.']
+      children: ['Zahn\u00e4rzt:innen', 'Dentalhygieniker:innen', 'Zahnmedizinische Assistent:innen']
     },
     {
       name: 'Management & Administration', type: 'Hauptseite',
-      children: ['Praxis-/Zentermanagement', 'Empfang & Administration', 'Arztsekret\u00e4r:innen', 'Back-Office (Abrechnung, QM, Personal)']
+      children: ['Praxis-/Zentermanagement', 'Empfang & Administration', 'Arztsekret\u00e4r:innen', 'Back-Office (Abrechnung, QM, Personal)'],
+      locations: ['Winterthur', 'Basel', 'St. Gallen', 'Schaffhausen']
     },
     {
       name: 'Corporate / \u00fcbergreifend', type: 'Hauptseite',
-      children: ['Gesundheitsmanagement / Corporate Health', 'Telemedizin & e-Health', 'Qualit\u00e4ts- & Prozessmanagement']
+      children: ['Gesundheitsmanagement / Corporate Health', 'Telemedizin & e-Health', 'Qualit\u00e4ts- & Prozessmanagement'],
+      locations: ['Winterthur']
     }
   ]
 };
@@ -208,39 +209,39 @@ const berufsfelderV2 = {
     {
       name: '\u00c4rztin / Arzt', type: 'Hauptseite',
       children: ['Allgemeine Innere Medizin', 'Dermatologie', 'Gyn\u00e4kologie & Geburtshilfe', 'Kardiologie', 'Rheumatologie', 'Psychiatrie & Psychotherapie', 'Zahnmedizin', 'Ophthalmologie', 'P\u00e4diatrie', 'usw.'],
-      locations: ['Z\u00fcrich', 'Basel', 'Bern', 'Winterthur', 'usw.']
+      locations: ['Z\u00fcrich', 'St. Gallen', 'Bern', 'Winterthur', 'Basel', 'Lausanne', 'Luzern', 'Baden', 'Gen\u00e8ve', 'Neuch\u00e2tel', 'Fribourg', 'Schaffhausen']
     },
     {
       name: 'Medizinische:r Praxisassistent:in (MPA)', type: 'Hauptseite',
       children: ['Praxisassistenz Allgemein', 'Fachbereich Gyn\u00e4kologie', 'Fachbereich Kardiologie', 'Teamleitung / Praxiskoordination', 'usw.'],
-      locations: ['Z\u00fcrich', 'Winterthur', 'Basel', 'Bern', 'usw.']
+      locations: ['Z\u00fcrich', 'Winterthur', 'St. Gallen', 'Lausanne', 'Schaffhausen', 'Basel', 'Bern', 'Luzern', 'Baden', 'Fribourg']
     },
     {
       name: 'Therapeut:in', type: 'Hauptseite',
       children: ['Physiotherapie', 'Psychotherapie', 'Ergotherapie', 'usw.'],
-      locations: ['Basel', 'St. Gallen', 'Bern', 'usw.']
+      locations: ['St. Gallen', 'Basel', 'Bern', 'Gen\u00e8ve']
     },
     {
       name: 'Apotheker:in', type: 'Hauptseite',
       children: ['Offizin-Apotheker:in', 'Gesch\u00e4ftsf\u00fchrende:r Apotheker:in', 'BAB / FPH-Weiterbildung', 'Koordination Apotheke', 'usw.'],
-      locations: ['Bern', 'Basel', 'Winterthur', 'Z\u00fcrich', 'usw.']
+      locations: ['Bern', 'Winterthur', 'Basel', 'Z\u00fcrich', 'Aarau', 'Solothurn']
     },
     {
       name: 'Fachfrau / Fachmann Apotheke', type: 'Hauptseite',
       children: ['Fachperson Apotheke', 'Pharma-Assistenz', 'Produktion / Dailymed', 'Drogist:in', 'usw.'],
-      locations: ['Z\u00fcrich', 'St. Gallen', 'Bern', 'usw.']
+      locations: ['Z\u00fcrich', 'St. Gallen', 'Aarau', 'Winterthur', 'Solothurn']
     },
     {
       name: 'Hauptsitz-Mitarbeitende', type: 'Hauptseite',
       subtitle: 'Corporate & Management',
       children: ['Leitung Medical Center', 'Business Development', 'Marketing & Merchandising', 'Digital & Content', 'Regionenleitung', 'usw.'],
-      locations: ['Winterthur', 'Z\u00fcrich', 'usw.']
+      locations: ['Winterthur', 'Basel', 'St. Gallen', 'Schaffhausen']
     },
     {
       name: 'Lehrberufe', type: 'Hauptseite',
       subtitle: 'Lehrstellen & Apprentissages',
       children: ['Fachfrau / Fachmann Apotheke EFZ', 'Med. Praxisassistent:in EFZ', 'Dentalassistent:in EFZ', 'usw.'],
-      locations: ['Z\u00fcrich', 'Bern', 'Basel', 'Luzern', 'usw.']
+      locations: ['Basel', 'Gen\u00e8ve', 'Bern', 'Lausanne', 'Solothurn', 'Neuch\u00e2tel']
     }
   ]
 };
@@ -280,8 +281,7 @@ const sharedData = {
         name: 'Weiterbildung', type: 'Unterseite',
         children: ['FPH Offizin by Medbase', 'Physiotherapeut:in', 'FaGe', 'MPA']
       },
-      { name: 'Teamleitung', type: 'Unterseite' },
-      { name: 'Gesch\u00e4ftsleitung', type: 'Unterseite' }
+      { name: 'Kaderposition', type: 'Unterseite' }
     ]
   },
 
@@ -377,7 +377,7 @@ const sharedData = {
     pages: [
       { name: 'Medbase Gruppe', type: 'Unterseite' },
       { name: 'Markenportfolio', type: 'Unterseite' },
-      { name: 'Gesch\u00e4ftsleitung', type: 'Unterseite' },
+      { name: 'Kaderposition', type: 'Unterseite' },
       { name: 'Managed Care', type: 'Unterseite' },
       { name: 'Integrierte Versorgung', type: 'Unterseite' },
       { name: 'Equal Pay / WE PAY FAIR', type: 'Unterseite' },
