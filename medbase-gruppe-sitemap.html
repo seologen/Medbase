@@ -38,12 +38,6 @@ body { margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Seg
 .header h1 span { opacity:.7; font-weight:400; }
 .header p { margin:0; opacity:.85; font-size:.9rem; }
 
-.variant-switch { display:flex; justify-content:center; gap:0; margin-top:10px; }
-.variant-btn { padding:6px 20px; font-size:.78rem; font-weight:600; border:2px solid rgba(255,255,255,.4); background:transparent; color:rgba(255,255,255,.7); cursor:pointer; transition:all 150ms ease; letter-spacing:.02em; }
-.variant-btn:first-child { border-radius:20px 0 0 20px; border-right:1px solid rgba(255,255,255,.4); }
-.variant-btn:last-child { border-radius:0 20px 20px 0; border-left:1px solid rgba(255,255,255,.4); }
-.variant-btn.active { background:rgba(255,255,255,.2); color:#fff; border-color:rgba(255,255,255,.6); }
-.variant-btn:hover:not(.active) { background:rgba(255,255,255,.1); }
 
 .main-nav { display:flex; justify-content:center; gap:2px; padding:0; background:#1e3a5f; }
 .main-nav-item { padding:10px 24px; color:rgba(255,255,255,.7); font-size:.82rem; font-weight:600; text-transform:uppercase; letter-spacing:.03em; border-bottom:3px solid transparent; }
@@ -131,7 +125,7 @@ body { margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Seg
 
 @media print {
   .main-nav { display:none !important; }
-  .variant-switch { display:none !important; }
+
   .cards-grid.collapsed { display:flex !important; }
   .page-card { break-inside:avoid; box-shadow:none; border:1px solid var(--color-border); }
 }
@@ -142,10 +136,6 @@ body { margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Seg
 <header class="header">
   <h1>Medbase Gruppe <span>| Sitemap</span></h1>
   <p>Karriere & Corporate Website &mdash; Kickoff 11.02.2026</p>
-  <div class="variant-switch">
-    <button class="variant-btn active" data-variant="v1">Variante 1 &mdash; nach Fachbereich</button>
-    <button class="variant-btn" data-variant="v2">Variante 2 &mdash; nach Berufsgruppe</button>
-  </div>
 </header>
 
 <div class="main-nav">
@@ -161,48 +151,9 @@ body { margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Seg
 
 <script>
 // ============================================================
-// VARIANTE 1: Berufsfelder nach Fachbereich
+// Berufsfelder nach Berufsgruppe
 // ============================================================
-const berufsfelderV1 = {
-  name: 'Berufsfelder',
-  navContext: 'Stellensuche',
-  pages: [
-    {
-      name: 'Medizin & Pflege', type: 'Hauptseite',
-      children: ['\u00c4rzt:innen', 'MPA', 'FaGe', 'APN (Advanced Practice Nurse)'],
-      locations: ['Z\u00fcrich', 'St. Gallen', 'Bern', 'Winterthur', 'Basel', 'Lausanne', 'Luzern', 'Schaffhausen', 'usw.']
-    },
-    {
-      name: 'Pharma & Apotheken', type: 'Hauptseite',
-      children: ['Apotheker:innen', 'Pharma-Assistent:innen', 'Fachpersonen Gesundheit Apotheke'],
-      locations: ['Z\u00fcrich', 'Bern', 'Winterthur', 'St. Gallen', 'Basel', 'Aarau', 'Solothurn']
-    },
-    {
-      name: 'Therapie & Rehabilitation', type: 'Hauptseite',
-      children: ['Physiotherapeut:innen', 'Ergotherapeut:innen'],
-      locations: ['St. Gallen', 'Basel', 'Bern', 'Gen\u00e8ve']
-    },
-    {
-      name: 'Zahnmedizin', type: 'Hauptseite',
-      children: ['Zahn\u00e4rzt:innen', 'Dentalhygieniker:innen', 'Zahnmedizinische Assistent:innen']
-    },
-    {
-      name: 'Management & Administration', type: 'Hauptseite',
-      children: ['Praxis-/Zentermanagement', 'Empfang & Administration', 'Arztsekret\u00e4r:innen', 'Back-Office (Abrechnung, QM, Personal)'],
-      locations: ['Winterthur', 'Basel', 'St. Gallen', 'Schaffhausen']
-    },
-    {
-      name: 'Corporate / \u00fcbergreifend', type: 'Hauptseite',
-      children: ['Gesundheitsmanagement / Corporate Health', 'Telemedizin & e-Health', 'Qualit\u00e4ts- & Prozessmanagement'],
-      locations: ['Winterthur']
-    }
-  ]
-};
-
-// ============================================================
-// VARIANTE 2: Berufsfelder nach Berufsgruppe
-// ============================================================
-const berufsfelderV2 = {
+const berufsfelder = {
   name: 'Berufsfelder',
   navContext: 'Stellensuche',
   pages: [
@@ -236,12 +187,6 @@ const berufsfelderV2 = {
       subtitle: 'Corporate & Management',
       children: ['Leitung Medical Center', 'Business Development', 'Marketing & Merchandising', 'Digital & Content', 'Regionenleitung'],
       locations: ['Winterthur', 'Basel', 'St. Gallen', 'Schaffhausen']
-    },
-    {
-      name: 'Lehrberufe', type: 'Hauptseite',
-      subtitle: 'Lehrstellen & Apprentissages',
-      children: ['Med. Praxisassistent:in EFZ', 'Fachfrau / Fachmann Apotheke EFZ'],
-      locations: ['Basel', 'Gen\u00e8ve', 'Bern', 'Lausanne', 'Solothurn', 'Neuch\u00e2tel']
     }
   ]
 };
@@ -272,10 +217,6 @@ const sharedData = {
         locations: ['Z\u00fcrich', 'Luzern', 'usw.']
       },
       {
-        name: 'Ausbildung', type: 'Unterseite',
-        children: ['Physiotherapeut:in', 'FaGe', 'MPA', 'Arzthelfer:in', 'usw.']
-      },
-      {
         name: 'Weiterbildung', type: 'Unterseite',
         children: ['FPH Offizin by Medbase', 'Physiotherapeut:in', 'FaGe', 'MPA']
       },
@@ -284,7 +225,7 @@ const sharedData = {
   },
 
   praxisstellen: {
-    name: 'Praxisstellen nach Standort',
+    name: 'Stellensuche nach Standort',
     navContext: 'Stellensuche',
     pages: [
       { name: 'Z\u00fcrich', type: 'Unterseite' },
@@ -375,13 +316,11 @@ const sharedData = {
     pages: [
       { name: 'Medbase Gruppe', type: 'Unterseite' },
       { name: 'Markenportfolio', type: 'Unterseite' },
-      { name: 'Kaderpositionen', type: 'Unterseite' },
       { name: 'Managed Care', type: 'Unterseite' },
       { name: 'Integrierte Versorgung', type: 'Unterseite' },
       { name: 'Equal Pay / WE PAY FAIR', type: 'Unterseite' },
       { name: 'Jahresbericht', type: 'Unterseite' },
       { name: 'Partnerschaften', type: 'Unterseite' },
-      { name: 'Work-Life-Balance', type: 'Unterseite' },
       {
         name: 'Standorte', type: 'Unterseite',
         subtitle: '188 Standorte gesamt',
@@ -391,27 +330,12 @@ const sharedData = {
   }
 };
 
-// ============================================================
-// Varianten-Switch
-// ============================================================
-let currentVariant = 'v1';
-
 function getPageData() {
-  const bf = currentVariant === 'v1' ? berufsfelderV1 : berufsfelderV2;
-  return { berufsfelder: bf, ...sharedData };
+  return { berufsfelder: berufsfelder, ...sharedData };
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   renderSitemap();
-
-  document.querySelectorAll('.variant-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentVariant = btn.dataset.variant;
-      renderSitemap();
-    });
-  });
 });
 
 // ============================================================
