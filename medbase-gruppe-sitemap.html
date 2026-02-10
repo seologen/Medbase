@@ -44,7 +44,6 @@ body { margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Seg
 .variant-btn:last-child { border-radius:0 20px 20px 0; border-left:1px solid rgba(255,255,255,.4); }
 .variant-btn.active { background:rgba(255,255,255,.2); color:#fff; border-color:rgba(255,255,255,.6); }
 .variant-btn:hover:not(.active) { background:rgba(255,255,255,.1); }
-.variant-desc { font-size:.7rem; color:rgba(255,255,255,.6); margin-top:4px; }
 
 .main-nav { display:flex; justify-content:center; gap:2px; padding:0; background:#1e3a5f; }
 .main-nav-item { padding:10px 24px; color:rgba(255,255,255,.7); font-size:.82rem; font-weight:600; text-transform:uppercase; letter-spacing:.03em; border-bottom:3px solid transparent; }
@@ -147,7 +146,6 @@ body { margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Seg
     <button class="variant-btn active" data-variant="v1">Variante 1 &mdash; nach Fachbereich</button>
     <button class="variant-btn" data-variant="v2">Variante 2 &mdash; nach Berufsgruppe</button>
   </div>
-  <div class="variant-desc" id="variant-desc">Berufsfelder: Medizin & Pflege, Pharma & Apotheken, Therapie, Zahnmedizin, Management, Corporate</div>
 </header>
 
 <div class="main-nav">
@@ -400,11 +398,6 @@ const sharedData = {
 // ============================================================
 let currentVariant = 'v1';
 
-const variantDescriptions = {
-  v1: 'Berufsfelder: Medizin & Pflege, Pharma & Apotheken, Therapie, Zahnmedizin, Management, Corporate',
-  v2: 'Berufsfelder: \u00c4rztin/Arzt, MPA, Therapeut:in, Apotheker:in, Fachfrau/Fachmann Apotheke, Hauptsitz, Lehrberufe'
-};
-
 function getPageData() {
   const bf = currentVariant === 'v1' ? berufsfelderV1 : berufsfelderV2;
   return { berufsfelder: bf, ...sharedData };
@@ -418,7 +411,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentVariant = btn.dataset.variant;
-      document.getElementById('variant-desc').textContent = variantDescriptions[currentVariant];
       renderSitemap();
     });
   });
